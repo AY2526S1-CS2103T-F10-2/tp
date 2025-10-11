@@ -21,6 +21,7 @@ import seedu.coursebook.logic.commands.HelpCommand;
 import seedu.coursebook.logic.commands.ListByCourseCommand;
 import seedu.coursebook.logic.commands.ListCommand;
 import seedu.coursebook.logic.commands.RemoveCourseCommand;
+import seedu.coursebook.logic.commands.SortCommand;
 import seedu.coursebook.logic.commands.SummaryCommand;
 import seedu.coursebook.logic.commands.UndoCommand;
 import seedu.coursebook.logic.parser.exceptions.ParseException;
@@ -66,15 +67,18 @@ public class CourseBookParser {
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.ALIAS_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+        case FindCommand.ALIAS_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+        case ListCommand.ALIAS_WORD:
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_COURSE);
             if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
                 return new ListByCourseCommandParser().parse(arguments);
@@ -101,6 +105,9 @@ public class CourseBookParser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
