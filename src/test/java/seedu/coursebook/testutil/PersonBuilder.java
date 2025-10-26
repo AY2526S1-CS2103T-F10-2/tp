@@ -12,6 +12,7 @@ import seedu.coursebook.model.person.Email;
 import seedu.coursebook.model.person.Name;
 import seedu.coursebook.model.person.Person;
 import seedu.coursebook.model.person.Phone;
+import seedu.coursebook.model.person.Remark;
 import seedu.coursebook.model.tag.Tag;
 import seedu.coursebook.model.util.SampleDataUtil;
 
@@ -33,6 +34,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private Set<Course> courses;
     private boolean isFavourite;
+    private Remark remark;
 
     /**
      * Constructs a {@code PersonBuilder} with default values.
@@ -48,6 +50,7 @@ public class PersonBuilder {
         courses = new HashSet<>();
         birthday = null;
         isFavourite = false;
+        remark = new Remark("");
     }
 
     /**
@@ -64,6 +67,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         courses = new HashSet<>(personToCopy.getCourses());
         isFavourite = personToCopy.isFavourite();
+        remark = personToCopy.getRemark();
     }
 
     /**
@@ -157,11 +161,22 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Remark} of the {@code Person} being built.
+     *
+     * @param remark The remark to set.
+     * @return This builder instance.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
+    /**
      * Builds and returns a {@code Person} object with the current builder values.
      *
      * @return A new {@code Person} instance.
      */
     public Person build() {
-        return new Person(name, phone, email, address, tags, courses, birthday, isFavourite);
+        return new Person(name, phone, email, address, tags, courses, birthday, isFavourite, remark);
     }
 }

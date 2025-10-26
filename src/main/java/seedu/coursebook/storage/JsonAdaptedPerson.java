@@ -17,6 +17,7 @@ import seedu.coursebook.model.person.Email;
 import seedu.coursebook.model.person.Name;
 import seedu.coursebook.model.person.Person;
 import seedu.coursebook.model.person.Phone;
+import seedu.coursebook.model.person.Remark;
 import seedu.coursebook.model.tag.Tag;
 
 
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedCourse> courses = new ArrayList<>();
     private final String birthday;
     private final Boolean isFavourite;
+    private final String remark;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -46,13 +48,15 @@ class JsonAdaptedPerson {
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("courses") List<JsonAdaptedCourse> courses,
             @JsonProperty("birthday") String birthday,
-            @JsonProperty("isFavourite") Boolean isFavourite) {
+            @JsonProperty("isFavourite") Boolean isFavourite,
+            @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.birthday = birthday;
         this.isFavourite = isFavourite;
+        this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -71,6 +75,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         birthday = source.getBirthday() != null ? source.getBirthday().value : null;
         isFavourite = source.isFavourite();
+        remark = source.getRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -140,8 +145,10 @@ class JsonAdaptedPerson {
 
         final boolean modelIsFavourite = isFavourite != null ? isFavourite : false;
 
+        final Remark modelRemark = remark != null ? new Remark(remark) : new Remark("");
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelCourses, modelBirthday,
-                modelIsFavourite);
+                modelIsFavourite, modelRemark);
     }
 
 }

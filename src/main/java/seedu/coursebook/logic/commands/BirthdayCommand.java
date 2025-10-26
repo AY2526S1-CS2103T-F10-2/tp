@@ -75,7 +75,8 @@ public class BirthdayCommand extends Command {
                 personToEdit.getTags(),
                 personToEdit.getCourses(),
                 birthday,
-                personToEdit.isFavourite()
+                personToEdit.isFavourite(),
+                personToEdit.getRemark()
         );
 
         model.setPerson(personToEdit, editedPerson);

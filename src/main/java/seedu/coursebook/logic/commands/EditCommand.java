@@ -114,7 +114,7 @@ public class EditCommand extends Command {
         boolean isFavourite = personToEdit.isFavourite();
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedCourses, updatedBirthday, isFavourite);
+                updatedAddress, updatedTags, updatedCourses, updatedBirthday, isFavourite, personToEdit.getRemark());
     }
 
     @Override

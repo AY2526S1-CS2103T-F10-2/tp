@@ -29,6 +29,7 @@ import seedu.coursebook.logic.commands.ListCommand;
 import seedu.coursebook.logic.commands.ListCoursesCommand;
 import seedu.coursebook.logic.commands.RedoCommand;
 import seedu.coursebook.logic.commands.RemoveCourseCommand;
+import seedu.coursebook.logic.commands.RemarkCommand;
 import seedu.coursebook.logic.commands.SortBirthdayCommand;
 import seedu.coursebook.logic.commands.SortCommand;
 import seedu.coursebook.logic.commands.SummaryCommand;
@@ -195,6 +196,9 @@ public class CourseBookParser {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavCommand.MESSAGE_USAGE));
             }
             return new FavCommand();
+
+        case RemarkCommand.COMMAND_WORD:
+            return new RemarkCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

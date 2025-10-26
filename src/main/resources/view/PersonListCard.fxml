@@ -33,6 +33,7 @@
       <FlowPane fx:id="courses" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday"/>
+      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
     </VBox>
 
       <!-- User Guide Link Section -->

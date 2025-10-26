@@ -108,7 +108,7 @@ public class FavouriteCommand extends Command {
     private static Person createFavouritePerson(Person person) {
         return new Person(person.getName(), person.getPhone(), person.getEmail(),
                 person.getAddress(), person.getTags(), person.getCourses(),
-                person.getBirthday(), true);
+                person.getBirthday(), true, person.getRemark());
     }
 
     private static String normalizeName(String name) {

@@ -242,7 +242,7 @@ public class ModelManager implements Model {
                 return c;
             }).collect(Collectors.toCollection(HashSet::new));
             return new Person(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(),
-                    person.getTags(), updatedCourses, person.getBirthday(), person.isFavourite());
+                    person.getTags(), updatedCourses, person.getBirthday(), person.isFavourite(), person.getRemark());
         }).collect(Collectors.toList());
 
         CourseBook newBook = new CourseBook();

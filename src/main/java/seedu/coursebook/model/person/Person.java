@@ -28,19 +28,21 @@ public class Person {
     private final Set<Course> courses = new HashSet<>();
     private final Birthday birthday;
     private final boolean isFavourite;
+    private final Remark remark;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Tag> tags, Set<Course> courses, Birthday birthday, boolean isFavourite) {
-        requireAllNonNull(name, phone, email, address, tags, courses);
+                  Set<Tag> tags, Set<Course> courses, Birthday birthday, boolean isFavourite, Remark remark) {
+        requireAllNonNull(name, phone, email, address, tags, courses, remark);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.birthday = birthday;
         this.isFavourite = isFavourite;
+        this.remark = remark;
         this.tags.addAll(tags);
         this.courses.addAll(courses);
     }
@@ -67,6 +69,10 @@ public class Person {
 
     public boolean isFavourite() {
         return isFavourite;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -121,13 +127,14 @@ public class Person {
                 && tags.equals(otherPerson.tags)
                 && courses.equals(otherPerson.courses)
                 && Objects.equals(birthday, otherPerson.birthday)
-                && isFavourite == otherPerson.isFavourite;
+                && isFavourite == otherPerson.isFavourite
+                && remark.equals(otherPerson.remark);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, courses, birthday, isFavourite);
+        return Objects.hash(name, phone, email, address, tags, courses, birthday, isFavourite, remark);
     }
 
     @Override
@@ -141,6 +148,7 @@ public class Person {
                 .add("courses", courses)
                 .add("birthday", birthday)
                 .add("isFavourite", isFavourite)
+                .add("remark", remark)
                 .toString();
     }
 

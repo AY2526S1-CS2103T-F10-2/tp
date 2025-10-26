@@ -79,7 +79,8 @@ public class RemoveCourseCommand extends Command {
                 personToEdit.getTags(),
                 updatedCourses,
                 personToEdit.getBirthday(),
-                personToEdit.isFavourite()
+                personToEdit.isFavourite(),
+                personToEdit.getRemark()
         );
 
         model.setPerson(personToEdit, editedPerson);

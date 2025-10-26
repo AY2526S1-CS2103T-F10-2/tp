@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label birthday;
     @FXML
+    private Label remark;
+    @FXML
     private Label favouriteIcon;
     @FXML
     private FlowPane tags;
@@ -59,6 +61,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         birthday.setText(person.getBirthday() != null ? person.getBirthday().value : "No birthday");
+        remark.setText(person.getRemark().value);
 
         // Set favourite icon
         if (person.isFavourite()) {
