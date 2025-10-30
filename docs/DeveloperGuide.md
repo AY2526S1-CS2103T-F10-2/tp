@@ -1049,7 +1049,7 @@ Refer to the guide [_Configuration guide_](Configuration.md).
 
 ---
 
-## **12. Documentation, logging, configuration, dev-ops**
+## 12. Documentation, logging, configuration, dev-ops
 
 - [Documentation guide](Documentation.md)
 - [Logging guide](Logging.md)
