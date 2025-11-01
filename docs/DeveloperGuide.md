@@ -369,7 +369,6 @@ CourseBook implements **27 command classes** following the Command Pattern:
 - `ExitCommand` - Exit application
 - `HelpCommand` - Show help
 - `HistoryCommand` - Show command history
-- `HomeCommand` - Navigate to home view
 - `SummaryCommand` - Display summary statistics
 - `ThemeCommand` - Change theme
 - `UndoCommand`, `RedoCommand` - Undo/redo operations

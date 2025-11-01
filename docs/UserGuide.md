@@ -37,9 +37,8 @@ Even though CourseBook runs in a window like other apps, it’s built for speed:
     * [4.2.3 Editing course color globally: `editcourse`](#423-editing-course-color-globally-editcourse)
     * [4.2.4 Listing all courses: `listcourses`](#424-listing-all-courses-listcourses)
     * [4.2.5 Listing persons in a course: `list c/COURSE_CODE`](#425-listing-persons-in-a-course-list-ccourse_code)
-  * [4.3 Display and Navigation Commands](#43-display-and-navigation-commands)
-    * [4.3.1 Navigating to home: `home`](#431-navigating-to-home-home)
-    * [4.3.2 Changing application theme: `theme`](#432-changing-application-theme-theme)
+  * [4.3 Display Commands](#43-display-commands)
+    * [4.3.1 Changing application theme: `theme`](#431-changing-application-theme-theme)
   * [4.4 Sorting Commands](#44-sorting-commands)
     * [4.4.1 Sorting by name: `sortn`](#441-sorting-by-name-sortn)
     * [4.4.2 Sorting by birthday: `sortb`](#442-sorting-by-birthday-sortb)
@@ -1032,33 +1031,9 @@ No such course: CS9999
 
 ---
 
-### 4.3 Display and Navigation Commands
+### 4.3 Display Commands
 
-#### 4.3.1 Navigating to home: `home`
-
-Returns to the home page showing all courses.
-
-**Format:** `home`
-
-**Parameters:** None
-
-**Behavior:**
-
-* Switches view to the courses panel
-* Shows all courses with enrollment counts
-
-**Expected Output:**
-```
-Welcome home!
-```
-![Course View](images/CoursesView.png)
-*Figure 11: Home view.*
-
-**Related:** [Listing courses](#424-listing-all-courses-listcourses)
-
----
-
-#### 4.3.2 Changing application theme: `theme`
+#### 4.3.1 Changing application theme: `theme`
 
 Changes the application's visual theme. The theme is not persistent i.e. will revert to the default `dark` theme when you launch the application.
 
@@ -1539,7 +1514,6 @@ Each person card has a copy button on the right side that copies the phone numbe
 | **sortn** | Sorts contacts by name | `sortn by/ORDER` (asc or desc) | `sortn by/asc` |
 | **sortb** | Sorts contacts by birthday | `sortb` | `sortb` |
 | **theme** | Changes application theme | `theme THEME_NAME` (dark, blue, love, tree) | `theme blue` |
-| **home** | Returns to home (courses view) | `home` | `home` |
 | **summary** | Shows summary statistics | `summary` | `summary` |
 | **undo** | Reverts last change | `undo` | `undo` |
 | **redo** | Reapplies last undone change | `redo` | `redo` |
