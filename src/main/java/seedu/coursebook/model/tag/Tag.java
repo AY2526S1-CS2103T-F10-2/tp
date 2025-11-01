@@ -9,8 +9,8 @@ import static seedu.coursebook.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names can be any value. Using only whitespace will delete the tag.";
+    public static final String VALIDATION_REGEX = ".*";
 
     public final String tagName;
 

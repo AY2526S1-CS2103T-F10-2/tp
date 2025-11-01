@@ -260,7 +260,7 @@ Adds a new contact to your coursebook.
 * `p/PHONE` (Required) — Phone number (valid format required)
 * `e/EMAIL` (Required) — Email address (valid format required)
 * `a/ADDRESS` (Required) — Physical address (any characters)
-* `t/TAG` (Optional, multiple allowed) — Tags for categorization
+* `t/TAG` (Optional, multiple allowed) — Tags for categorization (any characters)
 * `c/COURSE_CODE[,COLOR]` (Optional, multiple allowed) — Course code with optional color
 
 **Available Course Colors:** `green`, `yellow`, `red`, `blue`, `orange`, `purple`, `pink`
@@ -1597,20 +1597,20 @@ Delete the preferences.json file before launching the application again. This re
 ---
 ## 9. Glossary
 
-| Term | Definition |
-|------|------------|
-| **CLI** | Command Line Interface — text-based interface where users type commands |
-| **GUI** | Graphical User Interface — visual interface with buttons, windows, and icons |
-| **Index** | Position number of a person in the currently displayed list (1-based) |
-| **Parameter** | Information you provide to a command (e.g., name, phone, email) |
-| **Prefix** | Letters followed by `/` that identify a parameter (e.g., `n/` for name) |
-| **Tag** | Label you assign to contacts for categorization (e.g., "friend", "classmate") |
-| **Course Code** | Unique identifier for a course (e.g., CS2103T, CS2101) |
-| **Favorite** | Contacts marked with a star (★) for quick access |
-| **Partial Match** | Search that finds results containing the keyword (e.g., "ali" finds "Alice") |
-| **Case-Insensitive** | Search/matching that ignores uppercase/lowercase differences |
-| **JSON** | JavaScript Object Notation — file format used to store CourseBook data |
-| **JAR** | Java Archive — executable file format for Java applications |
+| Term | Definition                                                                                |
+|------|-------------------------------------------------------------------------------------------|
+| **CLI** | Command Line Interface — text-based interface where users type commands                   |
+| **GUI** | Graphical User Interface — visual interface with buttons, windows, and icons              |
+| **Index** | Position number of a person in the currently displayed list (1-based)                     |
+| **Parameter** | Information you provide to a command (e.g., name, phone, email)                           |
+| **Prefix** | Letters followed by `/` that identify a parameter (e.g., `n/` for name)                   |
+| **Tag** | Label you assign to contacts for categorization (e.g., "friend", "classmate", "#1 friend") |
+| **Course Code** | Unique identifier for a course (e.g., CS2103T, CS2101)                                    |
+| **Favorite** | Contacts marked with a star (★) for quick access                                          |
+| **Partial Match** | Search that finds results containing the keyword (e.g., "ali" finds "Alice")              |
+| **Case-Insensitive** | Search/matching that ignores uppercase/lowercase differences                              |
+| **JSON** | JavaScript Object Notation — file format used to store CourseBook data                    |
+| **JAR** | Java Archive — executable file format for Java applications                               |
 
 ---
 
