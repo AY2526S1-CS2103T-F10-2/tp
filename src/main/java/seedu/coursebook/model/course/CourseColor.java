@@ -6,7 +6,7 @@ package seedu.coursebook.model.course;
 public enum CourseColor {
     RED("#d32f2f"),
     ORANGE("#f57c00"),
-    YELLOW("#fbc02d"),
+    YELLOW("#DB9A00"),
     GREEN("#388e3c"),
     BLUE("#1976d2"),
     PURPLE("#7b1fa2"),
