@@ -786,7 +786,7 @@ Classes used by multiple components are in the `seedu.coursebook.commons` packag
 
 **`Version`**
 - Represents application version (major.minor.patch + early access flag)
-- Current version: `1.4.0` (with early access)
+- Current version: `1.5` (with early access)
 
 **`Index`**
 - Wrapper class for 1-based indices
