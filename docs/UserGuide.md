@@ -201,7 +201,7 @@ Type each command in the command box and press Enter:
    ```
    Expected: A help window opens displaying all available commands with examples.
 
-**Congratulations!** You're now ready to use CourseBook. Proceed to [Section 3: Features](#3-features) for complete command documentation.
+**Congratulations!** You're now ready to use CourseBook. Proceed to [Section 3: Features](#4-features) for complete command documentation.
 
 ---
 
@@ -312,7 +312,7 @@ New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 
 
 </div>
 
-**Related:** [Editing a person](#412-editing-a-person-edit), [Adding courses to a person](#43-course-management-commands)
+**Related:** [Editing a person](#412-editing-a-person-edit), [Adding courses to a person](#421-adding-courses-to-a-person-addcourse)
 
 ---
 
@@ -501,7 +501,7 @@ Listed all persons
 ```
 followed by a list view of all contacts.
 
-**Related:** [Listing persons by course](#432-listing-persons-in-a-course-list-ccourse_code), [Finding persons](#415-finding-persons-find-or-f)
+**Related:** [Listing persons by course](#425-listing-persons-in-a-course-list-ccourse_code), [Finding persons](#415-finding-persons-find-or-f)
 
 ---
 
@@ -592,7 +592,7 @@ No such contact found
 * Unknown prefix error if you use prefixes other than `n/`, `p/`, `e/`, `a/`, `t/`
 * Invalid name keywords if names contain non-alphabetic characters
 
-**Related:** [Listing all persons](#414-listing-all-persons-list-or-ls), [Listing by course](#432-listing-persons-in-a-course-list-ccourse_code)
+**Related:** [Listing all persons](#414-listing-all-persons-list-or-ls), [Listing by course](#425-listing-persons-in-a-course-list-ccourse_code)
 
 ---
 
@@ -983,7 +983,7 @@ Listed 5 course(s)
 No courses found in the course book
 ```
 
-**Related:** [Listing persons by course](#425-listing-persons-in-a-course-list-ccourse_code), [Summary](#46-viewing-summary-statistics-summary)
+**Related:** [Listing persons by course](#425-listing-persons-in-a-course-list-ccourse_code), [Summary](#452-viewing-summary-statistics-summary)
 
 ---
 
