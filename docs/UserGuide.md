@@ -1416,7 +1416,7 @@ Exiting Address Book as requested ...
 
 #### 4.7.1 Undoing commands: `undo`
 
-Reverts the last command that changed the coursebook.
+Reverts the last command that changed a person's details or the CourseBook theme.
 
 **Format:** `undo`
 
@@ -1424,8 +1424,8 @@ Reverts the last command that changed the coursebook.
 
 **Behavior:**
 
-* Only undoes commands that modify data (e.g., `add`, `delete`, `edit`)
-* Cannot undo read-only commands (e.g., `list`, `find`)
+* Commands that can be undone are `add`, `delete`, `edit`, `bday`, `favourite`, `unfavourite`, `addcourse`, `removecourse`, `editcourse`, `theme`, `clear`, `redo`
+* Commands that cannot be undone are `list`, `find`, `favs`, `find`, `viewperson`, `listcourses`, `list c/`, `sortn`, `sortb`, `history`, `summary`, `help`, `exit`
 * Can undo multiple times in sequence
 * After undo, the view switches to show all persons
 
