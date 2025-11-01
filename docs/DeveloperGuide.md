@@ -1404,7 +1404,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Term | Definition |
 |------|------------|
 | **Mainstream OS** | Windows, Linux, Unix, MacOS |
-| **Private contact detail** | A contact detail that is not meant to be shared with others |
 | **Actor** | A user or external entity that interacts with the system |
 | **CourseBook** | The system that stores and manages contact information |
 | **Contact** | A person whose details are stored in the course book |
