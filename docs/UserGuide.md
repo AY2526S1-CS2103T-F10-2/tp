@@ -146,7 +146,7 @@ A window similar to the one below should appear in a few seconds:
 
 The CourseBook interface has several key areas:
 
-![UI Overview](images/UiClassDiagram.png)
+![UI Overview](images/interface.jpg)
 *Figure 2: CourseBook UI components breakdown.*
 
 1. **Command Box** (top): Type your commands here and press Enter to execute
