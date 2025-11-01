@@ -260,7 +260,7 @@ Adds a new contact to your coursebook.
 * `p/PHONE` (Required) — Phone number (valid format required)
 * `e/EMAIL` (Required) — Email address (valid format required)
 * `a/ADDRESS` (Required) — Physical address (any characters)
-* `t/TAG` (Optional, multiple allowed) — Tags for categorization (any characters)
+* `t/TAG` (Optional, multiple allowed) — Tags for categorization (only alphanumeric characters e.g. bestFriend). 
 * `c/COURSE_CODE[,COLOR]` (Optional, multiple allowed) — Course code with optional color
 
 **Available Course Colors:** `green`, `yellow`, `red`, `blue`, `orange`, `purple`, `pink`
@@ -308,6 +308,9 @@ New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 
 **:exclamation: Warning:**
 
 - Duplicate detection checks name, phone, and email. If any match an existing contact, the add will fail.
+- Empty tag i.e. `edit 1 t/ ` will remove all tags.
+- Adding multiple tags with one of them being empty i.e. `edit 1 t/ t/husband` is not allowed.
+- Duplicate tags for the same person i.e. `edit 1 t/hello t/hello` will only insert one tag `hello`.
 
 </div>
 
