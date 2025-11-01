@@ -1060,7 +1060,7 @@ Welcome home!
 
 #### 4.3.2 Changing application theme: `theme`
 
-Changes the application's visual theme.
+Changes the application's visual theme. The theme is not persistent i.e. will revert to the default `dark` theme when you launch the application.
 
 **Format:** `theme THEME_NAME`
 
