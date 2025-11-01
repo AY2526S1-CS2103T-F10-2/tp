@@ -1268,10 +1268,10 @@ summary
 Summary: 15 person(s) found
 
 Breakdown by course:
-CS2030S: 5 person(s)
-CS2040S: 8 person(s)
-CS2101: 6 person(s)
-CS2103T: 10 person(s)
+[CS2030S]: 5 enrollment(s)
+[CS2040S]: 8 enrollment(s)
+[CS2101]: 6 enrollment(s)
+[CS2103T]: 10 enrollment(s)
 ```
 
 **Expected Output (empty coursebook):**
