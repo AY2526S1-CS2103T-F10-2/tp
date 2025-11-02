@@ -1652,6 +1652,19 @@ CourseBook represents a **moderate to high difficulty** extension of AB3. While 
 
 **Effort Estimate:** ~20 hours
 
+### Enhancement 10: Display what will be undone
+
+**Current Limitation:** Users cannot easily keep track of which command will be undone next. After performing multiple commands, it becomes unclear what the undo command will revert.
+
+**Proposed Enhancement:** Improve the undo command feature to display what action will be undone before execution, and show a summary of what was actually undone afterward. This helps users better understand and confirm their undo operations.
+
+**Implementation:**
+- Maintain descriptive history stack of executed commands that can be undone
+- Enhance the `undo` command to show a confirmation message detailing what was undone after execution.
+
+**Effort Estimate:** ~15 hours
+
+
 ---
 
 ## 16. Summary
