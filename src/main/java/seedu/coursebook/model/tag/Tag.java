@@ -9,7 +9,8 @@ import static seedu.coursebook.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should only have alphanumeric characters. "
+            + "e.g. bestFriend. Using only whitespace will delete the tag.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;

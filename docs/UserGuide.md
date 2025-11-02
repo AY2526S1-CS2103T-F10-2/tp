@@ -37,9 +37,8 @@ Even though CourseBook runs in a window like other apps, it’s built for speed:
     * [4.2.3 Editing course color globally: `editcourse`](#423-editing-course-color-globally-editcourse)
     * [4.2.4 Listing all courses: `listcourses`](#424-listing-all-courses-listcourses)
     * [4.2.5 Listing persons in a course: `list c/COURSE_CODE`](#425-listing-persons-in-a-course-list-ccourse_code)
-  * [4.3 Display and Navigation Commands](#43-display-and-navigation-commands)
-    * [4.3.1 Navigating to home: `home`](#431-navigating-to-home-home)
-    * [4.3.2 Changing application theme: `theme`](#432-changing-application-theme-theme)
+  * [4.3 Display Commands](#43-display-commands)
+    * [4.3.1 Changing application theme: `theme`](#431-changing-application-theme-theme)
   * [4.4 Sorting Commands](#44-sorting-commands)
     * [4.4.1 Sorting by name: `sortn`](#441-sorting-by-name-sortn)
     * [4.4.2 Sorting by birthday: `sortb`](#442-sorting-by-birthday-sortb)
@@ -146,7 +145,7 @@ A window similar to the one below should appear in a few seconds:
 
 The CourseBook interface has several key areas:
 
-![UI Overview](images/UiClassDiagram.png)
+![UI Overview](images/interface.jpg)
 *Figure 2: CourseBook UI components breakdown.*
 
 1. **Command Box** (top): Type your commands here and press Enter to execute
@@ -201,7 +200,7 @@ Type each command in the command box and press Enter:
    ```
    Expected: A help window opens displaying all available commands with examples.
 
-**Congratulations!** You're now ready to use CourseBook. Proceed to [Section 3: Features](#3-features) for complete command documentation.
+**Congratulations!** You're now ready to use CourseBook. Proceed to [Section 3: Features](#4-features) for complete command documentation.
 
 ---
 
@@ -261,7 +260,7 @@ Adds a new contact to your coursebook.
 * `p/PHONE` (Required) — Phone number (valid format required)
 * `e/EMAIL` (Required) — Email address (valid format required)
 * `a/ADDRESS` (Required) — Physical address (any characters)
-* `t/TAG` (Optional, multiple allowed) — Tags for categorization
+* `t/TAG` (Optional, multiple allowed) — Tags for categorization (only alphanumeric characters e.g. bestFriend). 
 * `c/COURSE_CODE[,COLOR]` (Optional, multiple allowed) — Course code with optional color
 
 **Available Course Colors:** `green`, `yellow`, `red`, `blue`, `orange`, `purple`, `pink`
@@ -309,10 +308,13 @@ New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 
 **:exclamation: Warning:**
 
 - Duplicate detection checks name, phone, and email. If any match an existing contact, the add will fail.
+- Empty tag i.e. `edit 1 t/ ` will remove all tags.
+- Adding multiple tags with one of them being empty i.e. `edit 1 t/ t/husband` is not allowed.
+- Duplicate tags for the same person i.e. `edit 1 t/hello t/hello` will only insert one tag `hello`.
 
 </div>
 
-**Related:** [Editing a person](#412-editing-a-person-edit), [Adding courses to a person](#43-course-management-commands)
+**Related:** [Editing a person](#412-editing-a-person-edit), [Adding courses to a person](#421-adding-courses-to-a-person-addcourse)
 
 ---
 
@@ -501,7 +503,7 @@ Listed all persons
 ```
 followed by a list view of all contacts.
 
-**Related:** [Listing persons by course](#432-listing-persons-in-a-course-list-ccourse_code), [Finding persons](#415-finding-persons-find-or-f)
+**Related:** [Listing persons by course](#425-listing-persons-in-a-course-list-ccourse_code), [Finding persons](#415-finding-persons-find-or-f)
 
 ---
 
@@ -592,7 +594,7 @@ No such contact found
 * Unknown prefix error if you use prefixes other than `n/`, `p/`, `e/`, `a/`, `t/`
 * Invalid name keywords if names contain non-alphabetic characters
 
-**Related:** [Listing all persons](#414-listing-all-persons-list-or-ls), [Listing by course](#432-listing-persons-in-a-course-list-ccourse_code)
+**Related:** [Listing all persons](#414-listing-all-persons-list-or-ls), [Listing by course](#425-listing-persons-in-a-course-list-ccourse_code)
 
 ---
 
@@ -983,7 +985,7 @@ Listed 5 course(s)
 No courses found in the course book
 ```
 
-**Related:** [Listing persons by course](#425-listing-persons-in-a-course-list-ccourse_code), [Summary](#46-viewing-summary-statistics-summary)
+**Related:** [Listing persons by course](#425-listing-persons-in-a-course-list-ccourse_code), [Summary](#452-viewing-summary-statistics-summary)
 
 ---
 
@@ -1032,35 +1034,11 @@ No such course: CS9999
 
 ---
 
-### 4.3 Display and Navigation Commands
+### 4.3 Display Commands
 
-#### 4.3.1 Navigating to home: `home`
+#### 4.3.1 Changing application theme: `theme`
 
-Returns to the home page showing all courses.
-
-**Format:** `home`
-
-**Parameters:** None
-
-**Behavior:**
-
-* Switches view to the courses panel
-* Shows all courses with enrollment counts
-
-**Expected Output:**
-```
-Welcome home!
-```
-![Course View](images/CoursesView.png)
-*Figure 11: Home view.*
-
-**Related:** [Listing courses](#424-listing-all-courses-listcourses)
-
----
-
-#### 4.3.2 Changing application theme: `theme`
-
-Changes the application's visual theme.
+Changes the application's visual theme. The theme is not persistent i.e. will revert to the default `dark` theme when you launch the application.
 
 **Format:** `theme THEME_NAME`
 
@@ -1293,10 +1271,10 @@ summary
 Summary: 15 person(s) found
 
 Breakdown by course:
-CS2030S: 5 person(s)
-CS2040S: 8 person(s)
-CS2101: 6 person(s)
-CS2103T: 10 person(s)
+[CS2030S]: 5 enrollment(s)
+[CS2040S]: 8 enrollment(s)
+[CS2101]: 6 enrollment(s)
+[CS2103T]: 10 enrollment(s)
 ```
 
 **Expected Output (empty coursebook):**
@@ -1416,7 +1394,7 @@ Exiting Address Book as requested ...
 
 #### 4.7.1 Undoing commands: `undo`
 
-Reverts the last command that changed the coursebook.
+Reverts the last command that changed a person's details or the CourseBook theme.
 
 **Format:** `undo`
 
@@ -1424,8 +1402,8 @@ Reverts the last command that changed the coursebook.
 
 **Behavior:**
 
-* Only undoes commands that modify data (e.g., `add`, `delete`, `edit`)
-* Cannot undo read-only commands (e.g., `list`, `find`)
+* Commands that can be undone are `add`, `delete`, `edit`, `bday`, `favourite`, `unfavourite`, `addcourse`, `removecourse`, `editcourse`, `theme`, `clear`, `redo`
+* Commands that cannot be undone are `list`, `find`, `favs`, `find`, `viewperson`, `listcourses`, `list c/`, `sortn`, `sortb`, `history`, `summary`, `help`, `exit`
 * Can undo multiple times in sequence
 * After undo, the view switches to show all persons
 
@@ -1539,7 +1517,6 @@ Each person card has a copy button on the right side that copies the phone numbe
 | **sortn** | Sorts contacts by name | `sortn by/ORDER` (asc or desc) | `sortn by/asc` |
 | **sortb** | Sorts contacts by birthday | `sortb` | `sortb` |
 | **theme** | Changes application theme | `theme THEME_NAME` (dark, blue, love, tree) | `theme blue` |
-| **home** | Returns to home (courses view) | `home` | `home` |
 | **summary** | Shows summary statistics | `summary` | `summary` |
 | **undo** | Reverts last change | `undo` | `undo` |
 | **redo** | Reapplies last undone change | `redo` | `redo` |
@@ -1623,20 +1600,20 @@ Delete the preferences.json file before launching the application again. This re
 ---
 ## 9. Glossary
 
-| Term | Definition |
-|------|------------|
-| **CLI** | Command Line Interface — text-based interface where users type commands |
-| **GUI** | Graphical User Interface — visual interface with buttons, windows, and icons |
-| **Index** | Position number of a person in the currently displayed list (1-based) |
-| **Parameter** | Information you provide to a command (e.g., name, phone, email) |
-| **Prefix** | Letters followed by `/` that identify a parameter (e.g., `n/` for name) |
-| **Tag** | Label you assign to contacts for categorization (e.g., "friend", "classmate") |
-| **Course Code** | Unique identifier for a course (e.g., CS2103T, CS2101) |
-| **Favorite** | Contacts marked with a star (★) for quick access |
-| **Partial Match** | Search that finds results containing the keyword (e.g., "ali" finds "Alice") |
-| **Case-Insensitive** | Search/matching that ignores uppercase/lowercase differences |
-| **JSON** | JavaScript Object Notation — file format used to store CourseBook data |
-| **JAR** | Java Archive — executable file format for Java applications |
+| Term | Definition                                                                                |
+|------|-------------------------------------------------------------------------------------------|
+| **CLI** | Command Line Interface — text-based interface where users type commands                   |
+| **GUI** | Graphical User Interface — visual interface with buttons, windows, and icons              |
+| **Index** | Position number of a person in the currently displayed list (1-based)                     |
+| **Parameter** | Information you provide to a command (e.g., name, phone, email)                           |
+| **Prefix** | Letters followed by `/` that identify a parameter (e.g., `n/` for name)                   |
+| **Tag** | Label you assign to contacts for categorization (e.g., "friend", "classmate", "#1 friend") |
+| **Course Code** | Unique identifier for a course (e.g., CS2103T, CS2101)                                    |
+| **Favorite** | Contacts marked with a star (★) for quick access                                          |
+| **Partial Match** | Search that finds results containing the keyword (e.g., "ali" finds "Alice")              |
+| **Case-Insensitive** | Search/matching that ignores uppercase/lowercase differences                              |
+| **JSON** | JavaScript Object Notation — file format used to store CourseBook data                    |
+| **JAR** | Java Archive — executable file format for Java applications                               |
 
 ---
 

@@ -23,7 +23,6 @@ import seedu.coursebook.logic.commands.FavouriteCommand;
 import seedu.coursebook.logic.commands.FindCommand;
 import seedu.coursebook.logic.commands.HelpCommand;
 import seedu.coursebook.logic.commands.HistoryCommand;
-import seedu.coursebook.logic.commands.HomeCommand;
 import seedu.coursebook.logic.commands.ListByCourseCommand;
 import seedu.coursebook.logic.commands.ListCommand;
 import seedu.coursebook.logic.commands.ListCoursesCommand;
@@ -165,12 +164,6 @@ public class CourseBookParser {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HistoryCommand.MESSAGE_USAGE));
             }
             return new HistoryCommand();
-
-        case HomeCommand.COMMAND_WORD:
-            if (!arguments.isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HomeCommand.MESSAGE_USAGE));
-            }
-            return new HomeCommand();
 
         case BirthdayCommand.COMMAND_WORD:
             return new BirthdayCommandParser().parse(arguments);

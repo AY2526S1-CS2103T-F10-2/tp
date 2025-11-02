@@ -101,6 +101,9 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
+        System.out.println("1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY);
+        System.out.println("1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND);
+        System.out.println("1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND);
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);

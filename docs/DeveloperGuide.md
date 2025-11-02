@@ -369,7 +369,6 @@ CourseBook implements **27 command classes** following the Command Pattern:
 - `ExitCommand` - Exit application
 - `HelpCommand` - Show help
 - `HistoryCommand` - Show command history
-- `HomeCommand` - Navigate to home view
 - `SummaryCommand` - Display summary statistics
 - `ThemeCommand` - Change theme
 - `UndoCommand`, `RedoCommand` - Undo/redo operations
@@ -786,7 +785,7 @@ Classes used by multiple components are in the `seedu.coursebook.commons` packag
 
 **`Version`**
 - Represents application version (major.minor.patch + early access flag)
-- Current version: `1.4.0` (with early access)
+- Current version: `1.5` (with early access)
 
 **`Index`**
 - Wrapper class for 1-based indices
@@ -1404,7 +1403,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Term | Definition |
 |------|------------|
 | **Mainstream OS** | Windows, Linux, Unix, MacOS |
-| **Private contact detail** | A contact detail that is not meant to be shared with others |
 | **Actor** | A user or external entity that interacts with the system |
 | **CourseBook** | The system that stores and manages contact information |
 | **Contact** | A person whose details are stored in the course book |
