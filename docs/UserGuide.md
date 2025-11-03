@@ -354,13 +354,13 @@ Edits an existing contact's details.
 *Edits the 1st person's phone and email*
 
 ```
-edit 2 n/Betsy Crower t/
+edit 2 n/Betsy Crowe t/
 ```
 *Edits the 2nd person's name and clears all tags*
 
 **Expected Output:**
 
-> Edited Person: Betsy Crower; Phone: 1234567; Email: betsycrowe@example.com; Address: Newgate Prison; Tags: ; 
+> Edited Person: Betsy Crowe; Phone: 1234567; Email: betsycrowe@example.com; Address: Newgate Prison; Tags: ; 
 
 
 **Error Messages:**
@@ -1544,7 +1544,7 @@ To transfer your CourseBook data:
 1. Install CourseBook on the new computer
 2. Run it once to create the data folder structure
 3. Replace the empty `CourseBook.json` file with your existing data file
-4. (Optional) Copy `preferences.json` to preserve theme and window settings
+4. (Optional) Copy `preferences.json` to preserve window settings
 
 ---
 
@@ -1585,21 +1585,20 @@ Delete the preferences.json file before launching the application again. This re
 ---
 ## 9. Glossary
 
-| Term | Definition                                                                                |
-|------|-------------------------------------------------------------------------------------------|
-| **CLI** | Command Line Interface — text-based interface where users type commands                   |
-| **GUI** | Graphical User Interface — visual interface with buttons, windows, and icons              |
-| **Index** | Position number of a person in the currently displayed list (1-based)                     |
-| **Parameter** | Information you provide to a command (e.g., name, phone, email)                           |
-| **Prefix** | Letters followed by `/` that identify a parameter (e.g., `n/` for name)                   |
-| **Tag** | Label you assign to contacts for categorization (e.g., "friend", "classmate", "#1 friend") |
-| **Course Code** | Unique identifier for a course (e.g., CS2103T, CS2101)                                    |
-| **favourite** | Contacts marked with a star (★) for quick access                                          |
-| **Partial Match** | Search that finds results containing the keyword (e.g., "ali" finds "Alice")              |
-| **Case-Insensitive** | Search/matching that ignores uppercase/lowercase differences                              |
-| **JSON** | JavaScript Object Notation — file format used to store CourseBook data                    |
-| **JAR** | Java Archive — executable file format for Java applications                               |
-
+| Term              | Definition                                                                                      |
+|-------------------|-------------------------------------------------------------------------------------------------|
+| **Case-Insensitive** | Search/matching that ignores uppercase/lowercase differences                                 |
+| **CLI**              | Command Line Interface — text-based interface where users type commands                      |
+| **Course Code**      | Unique identifier for a course (e.g., CS2103T, CS2101)                                       |
+| **favourite**        | Contacts marked with a star (★) for quick access                                             |
+| **GUI**              | Graphical User Interface — visual interface with buttons, windows, and icons                 |
+| **Index**            | Position number of a person in the currently displayed list (1-based)                        |
+| **JAR**              | Java Archive — executable file format for Java applications                                  |
+| **JSON**             | JavaScript Object Notation — file format used to store CourseBook data                       |
+| **Parameter**        | Information you provide to a command (e.g., name, phone, email)                              |
+| **Partial Match**    | Search that finds results containing the keyword (e.g., "ali" finds "Alice")                |
+| **Prefix**           | Letters followed by `/` that identify a parameter (e.g., `n/` for name)                      |
+| **Tag**              | Label you assign to contacts for categorization (e.g., "friend", "classmate", "#1friend")   |
 ---
 
 **End of User Guide**
