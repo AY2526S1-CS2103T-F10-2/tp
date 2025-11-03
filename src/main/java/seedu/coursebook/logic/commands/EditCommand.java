@@ -8,6 +8,7 @@ import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.coursebook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -90,12 +91,33 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_NO_CHANGES);
         }
 
-        boolean hasDuplicate = model.getFilteredPersonList().stream()
+        boolean hasSameName = model.getFilteredPersonList().stream()
                 .filter(person -> !person.equals(personToEdit)) // exclude the person being edited
-                .anyMatch(editedPerson::isSamePerson);
+                .anyMatch(editedPerson::isSameName);
 
-        if (hasDuplicate) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        boolean hasSamePhone = model.getFilteredPersonList().stream()
+                .filter(person -> !person.equals(personToEdit)) // exclude the person being edited
+                .anyMatch(editedPerson::isSamePhone);
+
+        boolean hasSameEmail = model.getFilteredPersonList().stream()
+                .filter(person -> !person.equals(personToEdit)) // exclude the person being edited
+                .anyMatch(editedPerson::isSameEmail);
+
+        List<String> duplicateFields = new ArrayList<>();
+
+        if (hasSameName) {
+            duplicateFields.add("name");
+        }
+        if (hasSamePhone) {
+            duplicateFields.add("phone");
+        }
+        if (hasSameEmail) {
+            duplicateFields.add("email");
+        }
+
+        if (!duplicateFields.isEmpty()) {
+            String message = "This edit will introduce a duplicate " + String.join(", ", duplicateFields) + ".";
+            throw new CommandException(message);
         }
 
         model.setPerson(personToEdit, editedPerson);

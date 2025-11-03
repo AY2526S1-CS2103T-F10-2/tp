@@ -8,7 +8,9 @@ import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.coursebook.commons.util.ToStringBuilder;
@@ -63,8 +65,21 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        List<String> duplicateFields = new ArrayList<>();
+
+        if (model.hasPersonWithName(toAdd)) {
+            duplicateFields.add("name");
+        }
+        if (model.hasPersonWithPhone(toAdd)) {
+            duplicateFields.add("phone");
+        }
+        if (model.hasPersonWithEmail(toAdd)) {
+            duplicateFields.add("email");
+        }
+
+        if (!duplicateFields.isEmpty()) {
+            String message = "Duplicate " + String.join(", ", duplicateFields) + " found.";
+            throw new CommandException(message);
         }
 
         // Enforce global course color consistency and conflict handling
