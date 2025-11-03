@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 
-# CourseBook (v1.5)
+# CourseBook (v1.6)
 
 ## Table of Contents
 
