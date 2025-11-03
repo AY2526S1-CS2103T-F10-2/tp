@@ -271,7 +271,7 @@ Adds a new contact to your coursebook.
 * `t/TAG` (Optional, multiple allowed) — Tags for categorization (only alphanumeric characters e.g. bestFriend). 
 * `c/COURSE_CODE[,COLOR]` (Optional, multiple allowed) — Course code with optional color
 
-**Available Course Colors:** `green`, `yellow`, `red`, `blue`, `orange`, `purple`, `pink`, `grey`
+**Available Course Colors:** `green`, `yellow`, `red`, `blue`, `orange`, `purple`, `pink`, `gray`
 
 * If no color is specified, `green` is used by default.
 * If a course code already exists with a color, the existing color is enforced globally.
@@ -1625,7 +1625,7 @@ Delete the preferences.json file before launching the application again. This re
 | **Parameter**        | Information you provide to a command (e.g., name, phone, email)                            |
 | **Partial Match**    | Search that finds results containing the keyword (e.g., "ali" finds "Alice")              |
 | **Prefix**           | Letters followed by `/` that identify a parameter (e.g., `n/` for name)                    |
-| **Tag**              | Label you assign to contacts for categorization (e.g., "friend", "classmate", "friend")   |
+| **Tag**              | Label you assign to contacts for categorization (e.g., "friend", "classmate")   |
 
 ---
 
