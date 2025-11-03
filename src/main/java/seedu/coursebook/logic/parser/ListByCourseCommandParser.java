@@ -5,6 +5,7 @@ import static seedu.coursebook.logic.Messages.MESSAGE_SINGLE_COURSE_ONLY;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_COURSE;
 
 import seedu.coursebook.logic.commands.ListByCourseCommand;
+import seedu.coursebook.logic.commands.SortCommand;
 import seedu.coursebook.logic.parser.exceptions.ParseException;
 import seedu.coursebook.model.course.Course;
 
@@ -27,6 +28,11 @@ public class ListByCourseCommandParser implements Parser<ListByCourseCommand> {
     public ListByCourseCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COURSE);
+
+        // reject unexpected preamble
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListByCourseCommand.MESSAGE_USAGE));
+        }
 
         // must have at least one c/
         if (argMultimap.getAllValues(PREFIX_COURSE).isEmpty()) {
