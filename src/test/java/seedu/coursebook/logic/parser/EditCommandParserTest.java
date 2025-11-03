@@ -72,7 +72,10 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "-5" + NAME_DESC_AMY, ParserUtil.MESSAGE_NEGATIVE_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, seedu.coursebook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertParseFailure(
+                parser,
+                "0" + NAME_DESC_AMY,
+                seedu.coursebook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
