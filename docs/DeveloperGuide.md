@@ -1654,7 +1654,7 @@ are lost after app is closed.
 
 ### Enhancement 10: Export to CSV/vCard
 
-**Current Limitation:** Unable to export contacts for use in other applications.
+**Current Limitation:** No optimised way to export contacts for use in other applications.
 
 **Proposed Enhancement:** Add `export` command to export contacts to CSV or vCard format.
 
