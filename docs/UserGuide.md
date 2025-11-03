@@ -3,7 +3,12 @@ layout: page
 title: User Guide
 ---
 
-# CourseBook (v1.6)
+<table>
+<tr>
+<td><img src="images/coursebooklogo.png" alt="CourseBook Logo" width="80"/></td>
+<td><h1>CourseBook (v1.6)</h1></td>
+</tr>
+</table>
 
 CourseBook is a desktop app that helps **university students** keep track of their course mates and the modules they’re taking. It’s designed to be fast and efficient. Just type in simple commands to add friends, see who’s taking which module, and find the right person to ask when you’re stuck on an assignment.
 
@@ -239,7 +244,7 @@ Before diving into specific commands, familiarize yourself with these convention
 
 <div markdown="span" class="alert alert-warning">
 
-**:exclamation: Caution when copying commands:**
+**:exclamation: Caution when copying commands:** <br>
 
 If using a PDF version of this guide, be careful when copying multi-line commands. Space characters around line breaks may be omitted when pasted.
 
@@ -273,11 +278,11 @@ Adds a new contact to your coursebook.
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-- Each person can be associated with any number of tags and courses, including none.
-- Use tags for categorization (e.g., `friend`, `groupmate`, `ta`).
-- Use colored course tags for quick visual identification.
+- Each person can be associated with any number of tags and courses, including none. <br>
+- Use tags for categorization (e.g., `friend`, `groupmate`, `ta`). <br>
+- Use colored course tags for quick visual identification. <br>
 
 </div>
 
@@ -303,7 +308,7 @@ add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 
 <div markdown="span" class="alert alert-danger">
 
-**:exclamation: Warning:**
+**:exclamation: Warning:** <br>
 
 - Duplicate detection checks name, phone, and email. If any match an existing contact, the add will fail. <br>
 - Empty tag i.e. `edit 1 t/ ` will remove all tags. <br>
@@ -336,10 +341,10 @@ Edits an existing contact's details.
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-- After editing, the view automatically switches to show all persons (not just the filtered list).
-- Use `addcourse` or `removecourse` if you want to modify courses.
+- After editing, the view automatically switches to show all persons (not just the filtered list). <br>
+- Use `addcourse` or `removecourse` if you want to modify courses. <br>
 
 </div>
 
@@ -394,7 +399,7 @@ Before deletion, a confirmation dialog appears showing the contacts to be delete
 
 <div markdown="span" class="alert alert-danger">
 
-**:exclamation: Warning:**
+**:exclamation: Warning:** <br>
 
 * Make sure you review the confirmation dialog carefully before clicking "OK".
 
@@ -407,10 +412,10 @@ Before deletion, a confirmation dialog appears showing the contacts to be delete
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-* After `find` or `list c/COURSE`, indices refer to the filtered results, not the full list.
-* If unsure about names, use `find` first to see exact names, then delete by index.
+* After `find` or `list c/COURSE`, indices refer to the filtered results, not the full list. <br>
+* If unsure about names, use `find` first to see exact names, then delete by index. <br>
 
 </div>
 
@@ -531,11 +536,11 @@ Finds contacts by searching across multiple fields with partial/substring matchi
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-- Use partial matches to find contacts quickly: `find n/ali` finds "Alice", "Alicia", etc.
-- Combine multiple fields to broaden your search: `find n/John e/@gmail` finds anyone named John OR with a Gmail address.
-- Unknown prefixes are rejected to prevent typos.
+- Use partial matches to find contacts quickly: `find n/ali` finds "Alice", "Alicia", etc. <br>
+- Combine multiple fields to broaden your search: `find n/John e/@gmail` finds anyone named John OR with a Gmail address. <br>
+- Unknown prefixes are rejected to prevent typos. <br>
 
 </div>
 
@@ -663,10 +668,10 @@ Adds a birthday to an existing contact.
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-* After adding birthdays, use `sortb` to sort contacts by upcoming birthdays.
-* Birthdays are displayed on person cards and in the detail view.
+* After adding birthdays, use `sortb` to sort contacts by upcoming birthdays. <br>
+* Birthdays are displayed on person cards and in the detail view. <br>
 
 </div>
 
@@ -721,9 +726,9 @@ Mark contacts as favourites or remove them from favourites.
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-* Use `favs` command to quickly view all your favourite contacts.
+* Use `favs` command to quickly view all your favourite contacts. <br>
 
 </div>
 
@@ -815,10 +820,10 @@ Adds one or more courses to a contact without replacing existing courses.
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-* Use `addcourse` when you want to add courses without affecting existing ones.
-* Course colors are global — changing a color for CS2103T changes it for all contacts with CS2103T.
+* Use `addcourse` when you want to add courses without affecting existing ones. <br>
+* Course colors are global — changing a color for CS2103T changes it for all contacts with CS2103T. <br>
 
 </div>
 
@@ -910,10 +915,10 @@ Sets the color for a course code globally across all contacts.
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-* Use consistent colors for similar course types (e.g., yellow for all CS courses, blue for math courses).
-* This helps with visual organization when viewing contact lists.
+* Use consistent colors for similar course types (e.g., yellow for all CS courses, blue for math courses). <br>
+* This helps with visual organization when viewing contact lists. <br>
 
 </div>
 
@@ -1040,9 +1045,9 @@ Changes the application's visual theme. The theme is not persistent i.e. will re
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-* Choose a theme that matches your preferences or reduces eye strain.
+* Choose a theme that matches your preferences or reduces eye strain. <br>
 
 </div>
 
@@ -1153,10 +1158,10 @@ Sorts contacts by how soon their next birthday occurs.
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-* Use this command to see whose birthdays are coming up soon.
-* Combine with `favs` to see favourite contacts' birthdays first: `favs` followed by `sortb`.
+* Use this command to see whose birthdays are coming up soon. <br>
+* Combine with `favs` to see favourite contacts' birthdays first: `favs` followed by `sortb`. <br>
 
 </div>
 
@@ -1303,10 +1308,10 @@ Opened help window.
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-* Use keyboard shortcut `F1` to quickly open the help window.
-* Click "Copy URL" in the help window to get the link to the full online User Guide.
+* Use keyboard shortcut `F1` to quickly open the help window. <br>
+* Click "Copy URL" in the help window to get the link to the full online User Guide. <br>
 
 </div>
 
@@ -1324,7 +1329,7 @@ Removes all contacts from the coursebook.
 
 <div markdown="span" class="alert alert-danger">
 
-**:exclamation: Warning:**
+**:exclamation: Warning:** <br>
 
 * Consider exporting your data file before using this command.
 
@@ -1387,10 +1392,10 @@ Reverts the last command that changed a person's details or the CourseBook theme
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-* You can undo multiple commands by running `undo` repeatedly.
-* Use `redo` to reapply undone commands if you change your mind.
+* You can undo multiple commands by running `undo` repeatedly. <br>
+* Use `redo` to reapply undone commands if you change your mind. <br>
 
 </div>
 
@@ -1464,10 +1469,10 @@ Each person card has a copy button on the right side that copies the phone numbe
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:**
+**:bulb: Tip:** <br>
 
-* This is faster than manually selecting and copying phone numbers.
-* Use this feature when you need to call or message a contact.
+* This is faster than manually selecting and copying phone numbers. <br>
+* Use this feature when you need to call or message a contact. <br>
 
 </div>
 
