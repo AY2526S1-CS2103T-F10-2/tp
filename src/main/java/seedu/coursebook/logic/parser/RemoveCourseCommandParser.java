@@ -31,7 +31,8 @@ public class RemoveCourseCommandParser implements Parser<RemoveCourseCommand> {
         } catch (ParseException pe) {
             // If preamble contains non-digit characters, it's a format error
             if (pe.getMessage().equals(MESSAGE_INVALID_INDEX) && !preamble.trim().matches("\\d+")) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveCourseCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        RemoveCourseCommand.MESSAGE_USAGE));
             }
             // Otherwise, re-throw the original exception (e.g., negative index, index out of range)
             throw pe;

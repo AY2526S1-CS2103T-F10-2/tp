@@ -75,10 +75,10 @@ public class AddCommand extends Command {
                     .map(c -> c.color)
                     .findFirst()
                     .orElse(null);
-            
+
             // Check if course color is the default GREEN (which means user didn't specify a color)
             boolean isDefaultGreen = (course.color == CourseColor.GREEN);
-            
+
             // Priority: Preserve existing color if course exists and user didn't specify a color
             if (existingColor != null && isDefaultGreen && existingColor != CourseColor.GREEN) {
                 // Course exists with a color (not GREEN), but user didn't specify one - use existing color
