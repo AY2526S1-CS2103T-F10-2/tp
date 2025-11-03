@@ -11,14 +11,14 @@ participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
 end box
 
 box UI UI_COLOR_T1
 participant ":UI" as UI UI_COLOR
 end box
 
-note over LogicManager, UI: **Phase 1: Parse and Validate**
+note over LogicManager, UI: **Phase 1: Initial Delete Command (Validation & Confirmation Request)**
 
 [-> LogicManager : execute("delete 1")
 activate LogicManager
@@ -36,7 +36,15 @@ deactivate DeleteCommandParser
 CourseBookParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
-note right of DeleteCommandParser: Validates index format
+DeleteCommandParser -> DeleteCommandParser : looksLikeIndices("1")
+activate DeleteCommandParser
+DeleteCommandParser --> DeleteCommandParser
+deactivate DeleteCommandParser
+
+DeleteCommandParser -> DeleteCommandParser : validate index
+activate DeleteCommandParser
+DeleteCommandParser --> DeleteCommandParser
+deactivate DeleteCommandParser
 
 create DeleteCommand
 DeleteCommandParser -> DeleteCommand : new DeleteCommand(Index(0))
@@ -47,74 +55,99 @@ deactivate DeleteCommand
 
 DeleteCommandParser --> CourseBookParser : d
 deactivate DeleteCommandParser
-
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> CourseBookParser
 destroy DeleteCommandParser
 
 CourseBookParser --> LogicManager : d
 deactivate CourseBookParser
 
-LogicManager -> DeleteCommand : execute(m)
+LogicManager -> DeleteCommand : execute(m, history)
 activate DeleteCommand
 
 DeleteCommand -> Model : getFilteredPersonList()
 activate Model
+
 Model --> DeleteCommand : lastShownList
 deactivate Model
 
-note right of DeleteCommand: Validates index < list.size()\nCollects personsToDelete\n(NO deletion yet)
+DeleteCommand -> DeleteCommand : executeByIndices(m, lastShownList)
+activate DeleteCommand
+
+note right: Validates index < list.size()\nCollects personsToDelete\n(NO deletion yet)
+
+DeleteCommand --> DeleteCommand
+deactivate DeleteCommand
+
+DeleteCommand -> DeleteCommand : formatConfirmationMessage(personsToDelete, warnings)
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommand : confirmationMessage
+deactivate DeleteCommand
 
 create CommandResult
 DeleteCommand -> CommandResult : forDeleteConfirmation(message, personsToDelete)
 activate CommandResult
 
-note right of CommandResult: requiresConfirmation=true\npersonsToDelete stored\nin CommandResult
+note right of CommandResult: requiresConfirmation=true\npersonsToDelete list stored
 
-CommandResult --> DeleteCommand : r
+CommandResult --> DeleteCommand
 deactivate CommandResult
 
 DeleteCommand --> LogicManager : r
 deactivate DeleteCommand
 
-LogicManager --> UI : r
+LogicManager --> UI : r (requiresConfirmation=true)
 deactivate LogicManager
 
-note over LogicManager, UI: **Phase 2: Confirmation Dialog**
-
-UI -> UI : showConfirmationDialog(r)
+UI -> UI : showConfirmationDialog(confirmationMessage)
 activate UI
-note right of UI: Display:\n"Are you sure you want to delete:\n- John Doe"\n\nUser clicks OK
+
+note right of UI: Display:\n"Are you sure you want to delete:\n- John Doe"
 
 UI --> UI
 deactivate UI
 
-note over LogicManager, UI: **Phase 3: Execute Deletion**
+note over LogicManager, UI: **Phase 2: After User Confirms (Actual Deletion)**
 
-UI -> LogicManager : executeConfirmedDelete(r)
+UI -> UI : user confirms deletion
+activate UI
+UI --> UI
+deactivate UI
+
+UI -> LogicManager : executeCommand(actualDeleteCommand)
 activate LogicManager
-
-note right of LogicManager: Extract personsToDelete\nfrom CommandResult
 
 loop for each person in personsToDelete
     LogicManager -> Model : deletePerson(person)
     activate Model
+
+    note right of Model: Actually delete\nthe person now
+
     Model --> LogicManager
     deactivate Model
 end
 
-note right of LogicManager: Save to storage
+LogicManager -> LogicManager : save to storage
+activate LogicManager
+LogicManager --> LogicManager
+deactivate LogicManager
 
 create CommandResult
 LogicManager -> CommandResult : new CommandResult("Deleted Person: John Doe")
 activate CommandResult
+
 CommandResult --> LogicManager
 deactivate CommandResult
 
 LogicManager --> UI : success result
 deactivate LogicManager
 
-UI -> UI : display("Deleted Person: John Doe")
+UI -> UI : display success message
 activate UI
 UI --> UI
 deactivate UI
+
+[<-- UI : "Deleted Person: John Doe"
 
 @enduml
