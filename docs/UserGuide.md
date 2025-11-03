@@ -47,7 +47,7 @@ Even though CourseBook runs in a window like other apps, it’s built for speed:
   * [4.4 Sorting Commands](#44-sorting-commands)
     * [4.4.1 Sorting by name: `sortn`](#441-sorting-by-name-sortn)
     * [4.4.2 Sorting by birthday: `sortb`](#442-sorting-by-birthday-sortb)
-  * [4.5 History and Information Commands](#45-history-and-information-commands)
+  * [4.5 History and Information Commands & Features](#45-history-and-information-commands--features)
     * [4.5.1 Viewing command history: `history`](#451-viewing-command-history-history)
     * [4.5.2 Viewing summary statistics: `summary`](#452-viewing-summary-statistics-summary)
     * [4.5.3 Navigating command history: Arrow keys](#453-navigating-command-history-arrow-keys)
@@ -271,7 +271,7 @@ Adds a new contact to your coursebook.
 * `t/TAG` (Optional, multiple allowed) — Tags for categorization (only alphanumeric characters e.g. bestFriend). 
 * `c/COURSE_CODE[,COLOR]` (Optional, multiple allowed) — Course code with optional color
 
-**Available Course Colors:** `green`, `yellow`, `red`, `blue`, `orange`, `purple`, `pink`
+**Available Course Colors:** `green`, `yellow`, `red`, `blue`, `orange`, `purple`, `pink`, `grey`
 
 * If no color is specified, `green` is used by default.
 * If a course code already exists with a color, the existing color is enforced globally.
@@ -931,7 +931,7 @@ Sets the color for a course code globally across all contacts.
 
 * `c/COURSE_CODE,COLOR` (Required) — Course code and color (comma-separated)
 
-**Available Colors:** `green`, `yellow`, `red`, `blue`, `orange`, `purple`, `pink`
+**Available Colors:** `green`, `yellow`, `red`, `blue`, `orange`, `purple`, `pink`, `gray`
 
 **Behavior:**
 
@@ -1213,7 +1213,7 @@ No contacts to sort by birthday.
 
 ---
 
-### 4.5 History and Information Commands
+### 4.5 History and Information Commands & Features
 
 #### 4.5.1 Viewing command history: `history`
 
@@ -1415,7 +1415,7 @@ Reverts the last command that changed a person's details or the CourseBook theme
 **Behavior:**
 
 * Commands that can be undone are `add`, `delete`, `edit`, `bday`, `favourite`, `unfavourite`, `addcourse`, `removecourse`, `editcourse`, `theme`, `clear`, `redo`
-* Commands that cannot be undone are `list`, `find`, `favs`, `find`, `viewperson`, `listcourses`, `list c/`, `sortn`, `sortb`, `history`, `summary`, `help`, `exit`
+* Commands that cannot be undone are `list`, `favs`, `find`, `viewperson`, `listcourses`, `list c/`, `sortn`, `sortb`, `history`, `summary`, `help`, `exit`
 * Can undo multiple times in sequence
 * After undo, the view switches to show all persons
 
@@ -1612,20 +1612,20 @@ Delete the preferences.json file before launching the application again. This re
 ---
 ## 9. Glossary
 
-| Term              | Definition                                                                                      |
-|-------------------|-------------------------------------------------------------------------------------------------|
-| **Case-Insensitive** | Search/matching that ignores uppercase/lowercase differences                                 |
-| **CLI**              | Command Line Interface — text-based interface where users type commands                      |
-| **Course Code**      | Unique identifier for a course (e.g., CS2103T, CS2101)                                       |
-| **favourite**        | Contacts marked with a star (★) for quick access                                             |
-| **GUI**              | Graphical User Interface — visual interface with buttons, windows, and icons                 |
-| **Index**            | Position number of a person in the currently displayed list (1-based)                        |
-| **JAR**              | Java Archive — executable file format for Java applications                                  |
-| **JSON**             | JavaScript Object Notation — file format used to store CourseBook data                       |
-| **Parameter**        | Information you provide to a command (e.g., name, phone, email)                              |
-| **Partial Match**    | Search that finds results containing the keyword (e.g., "ali" finds "Alice")                |
-| **Prefix**           | Letters followed by `/` that identify a parameter (e.g., `n/` for name)                      |
-| **Tag**              | Label you assign to contacts for categorization (e.g., "friend", "classmate", "#1friend")   |
+| Term              | Definition                                                                                    |
+|-------------------|-----------------------------------------------------------------------------------------------|
+| **Case-Insensitive** | Search/matching that ignores uppercase/lowercase differences                               |
+| **CLI**              | Command Line Interface — text-based interface where users type commands                    |
+| **Course Code**      | Unique identifier for a course (e.g., CS2103T, CS2101)                                     |
+| **favourite**        | Contacts marked with a star (★) for quick access                                           |
+| **GUI**              | Graphical User Interface — visual interface with buttons, windows, and icons               |
+| **Index**            | Position number of a person in the currently displayed list (1-based)                      |
+| **JAR**              | Java Archive — executable file format for Java applications                                |
+| **JSON**             | JavaScript Object Notation — file format used to store CourseBook data                     |
+| **Parameter**        | Information you provide to a command (e.g., name, phone, email)                            |
+| **Partial Match**    | Search that finds results containing the keyword (e.g., "ali" finds "Alice")              |
+| **Prefix**           | Letters followed by `/` that identify a parameter (e.g., `n/` for name)                    |
+| **Tag**              | Label you assign to contacts for categorization (e.g., "friend", "classmate", "friend")   |
 
 ---
 
