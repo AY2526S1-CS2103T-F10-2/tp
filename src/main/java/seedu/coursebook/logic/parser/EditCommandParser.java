@@ -43,7 +43,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         } catch (ParseException pe) {
             // If it's a negative index error or index out of range (0), re-throw it to surface the specific message
             if (pe.getMessage().equals(ParserUtil.MESSAGE_NEGATIVE_INDEX)
-                    || pe.getMessage().equals(seedu.coursebook.logic.Messages.MESSAGE_INDEX_OUT_OF_RANGE)) {
+                    || pe.getMessage().equals(seedu.coursebook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX)) {
                 throw pe;
             }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));

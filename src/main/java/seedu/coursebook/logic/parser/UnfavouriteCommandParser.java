@@ -31,7 +31,7 @@ public class UnfavouriteCommandParser implements Parser<UnfavouriteCommand> {
         } catch (ParseException pe) {
             // If it's a negative index error or index out of range (0), re-throw it
             if (pe.getMessage().equals(ParserUtil.MESSAGE_NEGATIVE_INDEX)
-                    || pe.getMessage().equals(seedu.coursebook.logic.Messages.MESSAGE_INDEX_OUT_OF_RANGE)) {
+                    || pe.getMessage().equals(seedu.coursebook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX)) {
                 throw pe;
             }
             // Fall through to parse as name for other index errors
