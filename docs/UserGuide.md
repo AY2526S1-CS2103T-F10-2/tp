@@ -1268,10 +1268,13 @@ Breakdown by course:
 
 #### 4.5.3 Navigating command history: Arrow keys
 
-You can use the ↑ (up arrow) and ↓ (down arrow) keys to cycle through previously entered commands, just like in a terminal. This allows you to quickly repeat or modify past commands without retyping them.
+CourseBook lets you scroll through your previously entered commands using the ↑ (up arrow) and ↓ (down arrow) keys, just like in a terminal.
 
-* Press ↑ to view the last command. 
-* Press ↓ to move forward in the command history.
+- Press ↑ to go back to the last command you typed.
+- Press ↑ again to keep going further back through your command history.
+- Press ↓ to move forward to more recent commands (after you've gone back).
+  
+This feature makes it easy to repeat, tweak, or re-run past commands without having to retype them from scratch.
 
 ---
 
