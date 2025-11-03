@@ -5,7 +5,6 @@ import static seedu.coursebook.logic.Messages.MESSAGE_SINGLE_COURSE_ONLY;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_COURSE;
 
 import seedu.coursebook.logic.commands.ListByCourseCommand;
-import seedu.coursebook.logic.commands.SortCommand;
 import seedu.coursebook.logic.parser.exceptions.ParseException;
 import seedu.coursebook.model.course.Course;
 
