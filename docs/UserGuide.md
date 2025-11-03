@@ -264,8 +264,8 @@ Adds a new contact to your coursebook.
 
 **Parameters:**
 
-* `n/NAME` (Required) — Full name (alphabetic characters only)
-* `p/PHONE` (Required) — Phone number (valid format required)
+* `n/NAME` (Required) — Full name
+* `p/PHONE` (Required) — Phone number (valid format required -- 7-15 digits)
 * `e/EMAIL` (Required) — Email address (valid format required)
 * `a/ADDRESS` (Required) — Physical address (any characters)
 * `t/TAG` (Optional, multiple allowed) — Tags for categorization (only alphanumeric characters e.g. bestFriend). 
@@ -275,6 +275,33 @@ Adds a new contact to your coursebook.
 
 * If no color is specified, `green` is used by default.
 * If a course code already exists with a color, the existing color is enforced globally.
+
+
+**Name Field Rules: <br>**
+The n/ (name) parameter accepts the following characters:
+- Letters and digits (a-z, A-Z, 0-9)
+- Space ( )
+- Apostrophe (')
+- Slash (/)
+- Hyphen (-)
+- Period (.)
+- Comma (,)
+
+Examples that match:
+- John
+- Jean-Luc
+- O'Connor
+- Mary Anne
+- Smith/Jones
+- Dr. John
+- J. K. Rowling
+- Smith, Jr.
+- Bob S/o Bobby
+- Mary D/o Mari
+
+Still prevents:<br>
+- Names starting with punctuation or space (e.g., -John, 'John,  John)
+- Completely empty strings
 
 <div markdown="span" class="alert alert-primary">
 
@@ -515,7 +542,7 @@ Finds contacts by searching across multiple fields with partial/substring matchi
 
 **Parameters:**
 
-* `n/NAME_KEYWORDS` (Optional) — Name search keywords (alphabetic only)
+* `n/NAME_KEYWORDS` (Optional) — Name search keywords
 * `p/PHONE_KEYWORDS` (Optional) — Phone search keywords
 * `e/EMAIL_KEYWORDS` (Optional) — Email search keywords
 * `a/ADDRESS_KEYWORDS` (Optional) — Address search keywords
@@ -589,7 +616,7 @@ No such contact found
 **Error Messages:**
 
 * Unknown prefix error if you use prefixes other than `n/`, `p/`, `e/`, `a/`, `t/`
-* Invalid name keywords if names contain non-acceptable characters (Acceptable: alphanumeric characters, spaces, hyphens, apostrophes, slashes)
+* Invalid name keywords if names contain non-acceptable characters
 
 **Related:** [Listing all persons](#414-listing-all-persons-list-or-ls), [Listing by course](#425-listing-persons-in-a-course-list-ccourse_code)
 
