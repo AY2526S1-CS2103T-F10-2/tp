@@ -2,7 +2,6 @@ package seedu.coursebook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_PHONE;
