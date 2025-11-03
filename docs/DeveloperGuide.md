@@ -1162,10 +1162,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 3b1. CourseBook shows "No such contact found!"
   - Use case resumes at step 2.
 
-- 3c. The given name matches multiple contacts:
-  - 3c1. CourseBook shows "Multiple contacts found with that name. Please delete by index."
-  - Use case resumes at step 2.
-
 - 5a. User cancels deletion:
   - Use case ends.
 
@@ -1644,6 +1640,90 @@ CourseBook represents a **moderate to high difficulty** extension of AB3. While 
 - Add `stats` command to open statistics window
 
 **Effort Estimate:** ~20 hours
+
+### Enhancement 10: Module Code Validation
+
+**Current Limitation:** Module codes do not have any validation or restrictions, allowing invalid codes like "ABC" or "12345".
+
+**Proposed Enhancement:** Add validation for module codes to ensure they follow standard university module code formats (e.g., CS2103T, MA1521, GEH1001).
+
+**Implementation:**
+- Add regex validation in `Course` class for module code format
+- Update `AddCommand` and `EditCommand` parsers to validate module codes
+- Display clear error messages for invalid module codes
+- Support configurable module code patterns for different universities
+
+**Effort Estimate:** ~4 hours
+
+### Enhancement 11: Persistent Theme Settings
+
+**Current Limitation:** Theme selection (light/dark mode) is not saved and resets to default on restart.
+
+**Proposed Enhancement:** Persist theme preference across application restarts.
+
+**Implementation:**
+- Add theme preference to `UserPrefs` class
+- Save theme selection to `preferences.json`
+- Load and apply saved theme on application startup
+- Ensure theme preference survives application updates
+
+**Effort Estimate:** ~2 hours
+
+### Enhancement 12: Persistent Course Tag Colors
+
+**Current Limitation:** Color-coded course tags are randomly assigned and change on restart, making it difficult to visually associate courses.
+
+**Proposed Enhancement:** Persist the color assigned to each course tag across restarts.
+
+**Implementation:**
+- Add color mapping to `UserPrefs` or create separate color configuration file
+- Store course code to color mappings
+- Load color mappings on startup and apply to course tags
+- Ensure consistent color assignment for the same course
+
+**Effort Estimate:** ~3 hours
+
+### Enhancement 13: Confirmation Dialog for Clear Command
+
+**Current Limitation:** The `clear` command immediately deletes all contacts without confirmation, risking accidental data loss.
+
+**Proposed Enhancement:** Add a confirmation dialog before executing the `clear` command.
+
+**Implementation:**
+- Update `ClearCommand` to trigger confirmation dialog
+- Add confirmation dialog UI component
+- Only execute clear if user confirms
+- Add option to bypass confirmation with flag (e.g., `clear --force`) for advanced users
+
+**Effort Estimate:** ~2 hours
+
+### Enhancement 14: Support for International Phone Number Formats
+
+**Current Limitation:** Phone numbers only accept digits; country codes with "+" and spaces (e.g., "+65 1234 5678") are rejected.
+
+**Proposed Enhancement:** Accept international phone number formats including "+" prefix and spaces for readability.
+
+**Implementation:**
+- Update `Phone` validation regex to accept "+", spaces, and hyphens
+- Normalize phone numbers for storage (remove spaces/hyphens)
+- Display phone numbers in formatted style
+- Support multiple international formats
+
+**Effort Estimate:** ~3 hours
+
+### Enhancement 15: Allow Birthday Deletion
+
+**Current Limitation:** Once a birthday is added, it cannot be deleted. If an invalid birthday is entered (e.g., 15-15-2020), the user cannot remove it.
+
+**Proposed Enhancement:** Allow users to delete/remove birthday field using edit command.
+
+**Implementation:**
+- Update `EditCommand` to support empty birthday parameter (e.g., `edit 1 b/`) to delete birthday
+- Update `EditPersonDescriptor` to distinguish between "no change" and "delete birthday"
+- Add validation to prevent invalid dates from being added in the first place
+- Update UI to handle missing birthday gracefully
+
+**Effort Estimate:** ~3 hours
 
 ---
 
