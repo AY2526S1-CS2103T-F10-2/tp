@@ -1268,6 +1268,7 @@ You can use the ↑ (up arrow) and ↓ (down arrow) keys to cycle through previo
 
 - Press ↑ to view the last command.
 - Press ↓ to move forward in the command history.
+
 ---
 
 ### 4.6 General Application Commands
