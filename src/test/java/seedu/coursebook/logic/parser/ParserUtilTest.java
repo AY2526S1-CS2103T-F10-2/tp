@@ -2,7 +2,7 @@ package seedu.coursebook.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.coursebook.logic.Messages.MESSAGE_INDEX_OUT_OF_RANGE;
+import static seedu.coursebook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.coursebook.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.coursebook.testutil.Assert.assertThrows;
 import static seedu.coursebook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -50,7 +50,7 @@ public class ParserUtilTest {
     public void parseIndex_zeroIndex_throwsParseException() {
         assertThrows(
                 ParseException.class,
-                MESSAGE_INDEX_OUT_OF_RANGE, () ->
+                MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
                 ParserUtil.parseIndex("0"));
     }
 

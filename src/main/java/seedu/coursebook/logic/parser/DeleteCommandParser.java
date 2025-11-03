@@ -86,7 +86,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                     }
                 }
                 if (hasZero) {
-                    throw new ParseException(seedu.coursebook.logic.Messages.MESSAGE_INDEX_OUT_OF_RANGE);
+                    throw new ParseException(seedu.coursebook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
                 }
                 throw new ParseException(seedu.coursebook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
@@ -128,7 +128,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         for (String token : tokens) {
             if (token.matches("0+")) {
-                throw new ParseException(seedu.coursebook.logic.Messages.MESSAGE_INDEX_OUT_OF_RANGE);
+                throw new ParseException(seedu.coursebook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             indices.add(ParserUtil.parseIndex(token));
         }
