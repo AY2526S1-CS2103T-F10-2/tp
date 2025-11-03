@@ -37,6 +37,12 @@ public class EditCourseColorCommand extends Command {
         if (courseCode == null || color == null) {
             throw new CommandException("Course code and color must be provided");
         }
+        // Check if course exists before updating
+        boolean courseExists = model.getFilteredCourseList().stream()
+                .anyMatch(c -> c.courseCode.equalsIgnoreCase(courseCode));
+        if (!courseExists) {
+            throw new CommandException("Course does not exist");
+        }
         model.setCourseColor(courseCode, color);
         return new CommandResult("Updated color for " + courseCode + " to " + color.name());
     }

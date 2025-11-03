@@ -8,6 +8,9 @@ import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.coursebook.commons.util.ToStringBuilder;
 import seedu.coursebook.logic.CommandHistory;
 import seedu.coursebook.logic.Messages;
@@ -65,22 +68,44 @@ public class AddCommand extends Command {
         }
 
         // Enforce global course color consistency and conflict handling
+        Set<Course> updatedCourses = new HashSet<>();
         for (Course course : toAdd.getCourses()) {
             CourseColor existingColor = model.getFilteredCourseList().stream()
                     .filter(c -> c.courseCode.equalsIgnoreCase(course.courseCode))
                     .map(c -> c.color)
                     .findFirst()
                     .orElse(null);
-            if (existingColor != null && course.color != null && existingColor != course.color) {
+            
+            // Check if course color is the default GREEN (which means user didn't specify a color)
+            boolean isDefaultGreen = (course.color == CourseColor.GREEN);
+            
+            // Priority: Preserve existing color if course exists and user didn't specify a color
+            if (existingColor != null && isDefaultGreen && existingColor != CourseColor.GREEN) {
+                // Course exists with a color (not GREEN), but user didn't specify one - use existing color
+                updatedCourses.add(new Course(course.courseCode, existingColor));
+            } else if (existingColor != null && course.color != null && existingColor != course.color) {
+                // User explicitly specified a different color than existing - update globally to user's choice
                 model.setCourseColor(course.courseCode, course.color);
-            } else if (existingColor == null && course.color == null) {
+                updatedCourses.add(new Course(course.courseCode, course.color));
+            } else if (existingColor == null && isDefaultGreen) {
+                // New course, no color specified - default to GREEN
                 model.setCourseColor(course.courseCode, CourseColor.GREEN);
+                updatedCourses.add(new Course(course.courseCode, CourseColor.GREEN));
+            } else if (existingColor != null && existingColor == course.color) {
+                // Existing color matches what user specified - no change needed
+                updatedCourses.add(course);
+            } else {
+                // No conflict, use course as is (e.g., existingColor is GREEN and course.color is GREEN)
+                updatedCourses.add(course);
             }
         }
 
-        model.addPerson(toAdd);
+        // Create person with updated courses that have correct colors enforced
+        Person personToAdd = new Person(toAdd.getName(), toAdd.getPhone(), toAdd.getEmail(),
+                toAdd.getAddress(), toAdd.getTags(), updatedCourses, toAdd.getBirthday(), toAdd.isFavourite());
+        model.addPerson(personToAdd);
         model.commitCourseBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToAdd)));
     }
 
     @Override

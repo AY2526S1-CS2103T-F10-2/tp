@@ -2,6 +2,7 @@ package seedu.coursebook.logic.parser;
 
 import static seedu.coursebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_COURSE;
+import static seedu.coursebook.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Set;
 
@@ -23,7 +24,18 @@ public class RemoveCourseCommandParser implements Parser<RemoveCourseCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveCourseCommand.MESSAGE_USAGE));
         }
 
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        Index index;
+        String preamble = argMultimap.getPreamble();
+        try {
+            index = ParserUtil.parseIndex(preamble);
+        } catch (ParseException pe) {
+            // If preamble contains non-digit characters, it's a format error
+            if (pe.getMessage().equals(MESSAGE_INVALID_INDEX) && !preamble.trim().matches("\\d+")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveCourseCommand.MESSAGE_USAGE));
+            }
+            // Otherwise, re-throw the original exception (e.g., negative index, index out of range)
+            throw pe;
+        }
 
         if (argMultimap.getAllValues(PREFIX_COURSE).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveCourseCommand.MESSAGE_USAGE));
