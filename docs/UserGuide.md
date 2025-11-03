@@ -305,10 +305,10 @@ add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 
 **:exclamation: Warning:**
 
-* Duplicate detection checks name, phone, and email. If any match an existing contact, the add will fail.
-* Empty tag i.e. `edit 1 t/ ` will remove all tags.
-* Adding multiple tags with one of them being empty i.e. `edit 1 t/ t/husband` is not allowed.
-* Duplicate tags for the same person i.e. `edit 1 t/hello t/hello` will only insert one tag `hello`.
+- Duplicate detection checks name, phone, and email. If any match an existing contact, the add will fail. <br>
+- Empty tag i.e. `edit 1 t/ ` will remove all tags. <br>
+- Adding multiple tags with one of them being empty i.e. `edit 1 t/ t/husband` is not allowed. <br>
+- Duplicate tags for the same person i.e. `edit 1 t/hello t/hello` will only insert one tag `hello`. <br>
 
 </div>
 
