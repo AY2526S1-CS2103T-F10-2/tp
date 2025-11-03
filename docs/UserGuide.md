@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-# CourseBook (v1.5)
+# CourseBook (v1.6)
 
 CourseBook is a desktop app that helps **university students** keep track of their course mates and the modules they’re taking. It’s designed to be fast and efficient. Just type in simple commands to add friends, see who’s taking which module, and find the right person to ask when you’re stuck on an assignment.
 
@@ -45,7 +45,7 @@ Even though CourseBook runs in a window like other apps, it’s built for speed:
   * [4.5 History and Information Commands](#45-history-and-information-commands)
     * [4.5.1 Viewing command history: `history`](#451-viewing-command-history-history)
     * [4.5.2 Viewing summary statistics: `summary`](#452-viewing-summary-statistics-summary)
-    * [4.5.3 Navigating previous commands: Arrow keys](#453-navigating-previous-commands-arrow-keys)
+    * [4.5.3 Navigating command history: Arrow keys](#453-navigating-command-history-arrow-keys)
   * [4.6 General Application Commands](#46-general-application-commands)
     * [4.6.1 Viewing help: `help`](#461-viewing-help-help)
     * [4.6.2 Clearing all entries: `clear`](#462-clearing-all-entries-clear)
@@ -288,9 +288,8 @@ add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 ```
 *Adds John Doe without tags or courses*
 
-```
-add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/classmate
-```
+> add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/classmate
+
 *Adds Betsy Crowe with two tags (friend, classmate)*
 
 >add n/Alice p/94351253 e/alice@example.com a/123, Jurong West Ave 6 c/CS2103T,yellow c/CS2101,blue
@@ -306,10 +305,10 @@ add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t
 
 **:exclamation: Warning:**
 
-- Duplicate detection checks name, phone, and email. If any match an existing contact, the add will fail.
-- Empty tag i.e. `edit 1 t/ ` will remove all tags.
-- Adding multiple tags with one of them being empty i.e. `edit 1 t/ t/husband` is not allowed.
-- Duplicate tags for the same person i.e. `edit 1 t/hello t/hello` will only insert one tag `hello`.
+* Duplicate detection checks name, phone, and email. If any match an existing contact, the add will fail.
+* Empty tag i.e. `edit 1 t/ ` will remove all tags.
+* Adding multiple tags with one of them being empty i.e. `edit 1 t/ t/husband` is not allowed.
+* Duplicate tags for the same person i.e. `edit 1 t/hello t/hello` will only insert one tag `hello`.
 
 </div>
 
@@ -455,9 +454,9 @@ delete 1
 *Figure 5: Delete confirmation screen for singular person.*
 
 **Expected Output (after confirmation):**
-```
-Deleted Person: John Doe; Phone: 98765432; Email: johnd@example.com; Address: John street, block 123, #01-01; Courses: ; Tags: 
-```
+
+>Deleted Person: John Doe; Phone: 98765432; Email: johnd@example.com; Address: John street, block 123, #01-01; Courses: ; Tags: 
+
 
 **Expected Output (multiple deletions):**
     
@@ -1262,12 +1261,12 @@ Breakdown by course:
 
 ---
 
-#### 4.5.3 Navigating previous commands: Arrow keys
+#### 4.5.3 Navigating command history: Arrow keys
 
 You can use the ↑ (up arrow) and ↓ (down arrow) keys to cycle through previously entered commands, just like in a terminal. This allows you to quickly repeat or modify past commands without retyping them.
 
-- Press ↑ to view the last command.
-- Press ↓ to move forward in the command history.
+* Press ↑ to view the last command. 
+* Press ↓ to move forward in the command history.
 
 ---
 
