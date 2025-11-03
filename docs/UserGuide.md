@@ -1599,6 +1599,7 @@ Delete the preferences.json file before launching the application again. This re
 | **Partial Match**    | Search that finds results containing the keyword (e.g., "ali" finds "Alice")                |
 | **Prefix**           | Letters followed by `/` that identify a parameter (e.g., `n/` for name)                      |
 | **Tag**              | Label you assign to contacts for categorization (e.g., "friend", "classmate", "#1friend")   |
+
 ---
 
 **End of User Guide**
