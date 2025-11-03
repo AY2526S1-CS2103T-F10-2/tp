@@ -173,6 +173,20 @@ public class AddCourseCommandTest {
             return false;
         }
 
+        @Override
+        public boolean hasPersonWithName(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonWithPhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonWithEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
 
@@ -269,5 +283,19 @@ public class AddCourseCommandTest {
             return false;
         }
 
+        @Override
+        public boolean hasPersonWithName(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonWithPhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonWithEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 }
