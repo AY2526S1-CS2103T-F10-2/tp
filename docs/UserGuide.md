@@ -5,7 +5,7 @@ title: User Guide
 
 <table>
 <tr>
-<td><img src="images/coursebooklogo.png" alt="CourseBook Logo" width="80"/></td>
+<td><img src="images/coursebooklogo.png" alt="CourseBook Logo" width="100"/></td>
 <td><h1>CourseBook (v1.6)</h1></td>
 </tr>
 </table>
