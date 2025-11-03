@@ -1529,138 +1529,21 @@ CourseBook represents a **moderate to high difficulty** extension of AB3. While 
 
 ### Team Size: 5
 
-### Enhancement 1: Support for Multiple Phone Numbers per Person
+### Enhancement 1: Allow Birthday Deletion
 
-**Current Limitation:** Each person can only have one phone number.
+**Current Limitation:** Once a birthday is added, it cannot be deleted. If a birthday is entered, the user cannot remove it.
 
-**Proposed Enhancement:** Allow multiple phone numbers (e.g., mobile, home, office) with labels.
-
-**Implementation:**
-- Change `Phone` from a single value to a `Set<LabeledPhone>`
-- Update `AddCommand`, `EditCommand` parsers to support multiple phone prefixes (e.g., `p/mobile:91234567 p/home:67654321`)
-- Update JSON serialization to handle phone list
-- Update UI to display all phones
-
-**Effort Estimate:** ~12 hours
-
-### Enhancement 2: Fuzzy Search
-
-**Current Limitation:** Search only supports exact substring matching.
-
-**Proposed Enhancement:** Implement fuzzy search using Levenshtein distance or similar algorithm.
+**Proposed Enhancement:** Allow users to delete/remove birthday field using edit command.
 
 **Implementation:**
-- Add `FuzzySearchPredicate` that accepts similarity threshold
-- Update `FindCommand` to support fuzzy mode (e.g., `find n/alic --fuzzy`)
-- Rank results by similarity score
+- Update `EditCommand` to support empty birthday parameter (e.g., `edit 1 b/`) to delete birthday
+- Update `EditPersonDescriptor` to distinguish between "no change" and "delete birthday"
+- Add validation to prevent invalid dates from being added in the first place
+- Update UI to handle missing birthday gracefully
 
-**Effort Estimate:** ~10 hours
+**Effort Estimate:** ~1.5 hours
 
-### Enhancement 3: Export to CSV/vCard
-
-**Current Limitation:** No way to export contacts for use in other applications.
-
-**Proposed Enhancement:** Add `export` command to export contacts to CSV or vCard format.
-
-**Implementation:**
-- Add `ExportCommand` with format parameter (csv, vcf)
-- Implement CSV and vCard serialization
-- Add file chooser dialog for output path
-
-**Effort Estimate:** ~15 hours
-
-### Enhancement 4: Import from CSV/vCard
-
-**Current Limitation:** No way to bulk import contacts.
-
-**Proposed Enhancement:** Add `import` command to import contacts from CSV or vCard file.
-
-**Implementation:**
-- Add `ImportCommand` with file path parameter
-- Implement CSV and vCard parsing with validation
-- Handle duplicates (skip, merge, or ask user)
-
-**Effort Estimate:** ~18 hours
-
-### Enhancement 5: Recurring Events/Reminders
-
-**Current Limitation:** Only birthdays are tracked; no support for other recurring events (e.g., group meetings).
-
-**Proposed Enhancement:** Add support for custom recurring events attached to persons or courses.
-
-**Implementation:**
-- Add `Event` entity with title, date, recurrence pattern
-- Add `AddEventCommand`, `RemoveEventCommand`, `ListEventsCommand`
-- Add event sorting and filtering
-
-**Effort Estimate:** ~25 hours
-
-### Enhancement 6: Profile Pictures
-
-**Current Limitation:** No visual representation of persons (all cards look similar).
-
-**Proposed Enhancement:** Support profile pictures for persons.
-
-**Implementation:**
-- Add `profilePicturePath` field to `Person`
-- Add `setpicture` command to link image file
-- Update `PersonCard` to display image (with placeholder if none)
-- Store images in `data/images/` folder
-
-**Effort Estimate:** ~12 hours
-
-### Enhancement 7: Keyboard Shortcuts for Commands
-
-**Current Limitation:** All commands must be typed fully (no shortcuts).
-
-**Proposed Enhancement:** Support keyboard shortcuts for common commands (e.g., Ctrl+L for list, Ctrl+F for find).
-
-**Implementation:**
-- Add keyboard event handlers in `MainWindow`
-- Map shortcuts to command text
-- Add shortcuts to help window
-
-**Effort Estimate:** ~6 hours
-
-### Enhancement 8: Dark Mode Auto-Switch Based on System Theme
-
-**Current Limitation:** Theme must be manually changed.
-
-**Proposed Enhancement:** Detect system theme (light/dark) and automatically switch CourseBook theme.
-
-**Implementation:**
-- Detect system theme on startup (platform-specific)
-- Add auto-switch setting to preferences
-- Listen for system theme changes (if possible on Java 17)
-
-**Effort Estimate:** ~10 hours
-
-### Enhancement 9: Advanced Statistics View
-
-**Current Limitation:** `summary` command only shows basic counts.
-
-**Proposed Enhancement:** Add charts and graphs for course enrollment trends, birthday distribution, etc.
-
-**Implementation:**
-- Integrate JavaFX charting library
-- Create `StatisticsWindow` with bar charts, pie charts
-- Add `stats` command to open statistics window
-
-**Effort Estimate:** ~20 hours
-
-### Enhancement 10: Display what will be undone
-
-**Current Limitation:** Users cannot easily keep track of which command will be undone next. After performing multiple commands, it becomes unclear what the undo command will revert.
-
-**Proposed Enhancement:** Improve the undo command feature to display what action will be undone before execution, and show a summary of what was actually undone afterward. This helps users better understand and confirm their undo operations.
-
-**Implementation:**
-- Maintain descriptive history stack of executed commands that can be undone
-- Enhance the `undo` command to show a confirmation message detailing what was undone after execution.
-
-**Effort Estimate:** ~15 hours
-
-### Enhancement 11: Module Code Validation
+### Enhancement 2: Module Code Validation
 
 **Current Limitation:** Module codes do not have any validation or restrictions, allowing invalid codes like "ABC" or "12345".
 
@@ -1672,37 +1555,9 @@ CourseBook represents a **moderate to high difficulty** extension of AB3. While 
 - Display clear error messages for invalid module codes
 - Support configurable module code patterns for different universities
 
-**Effort Estimate:** ~4 hours
-
-### Enhancement 12: Persistent Theme Settings
-
-**Current Limitation:** Theme selection (light/dark mode) is not saved and resets to default on restart.
-
-**Proposed Enhancement:** Persist theme preference across application restarts.
-
-**Implementation:**
-- Add theme preference to `UserPrefs` class
-- Save theme selection to `preferences.json`
-- Load and apply saved theme on application startup
-- Ensure theme preference survives application updates
-
 **Effort Estimate:** ~2 hours
 
-### Enhancement 13: Persistent Course Tag Colors
-
-**Current Limitation:** Color-coded course tags are randomly assigned and change on restart, making it difficult to visually associate courses.
-
-**Proposed Enhancement:** Persist the color assigned to each course tag across restarts.
-
-**Implementation:**
-- Add color mapping to `UserPrefs` or create separate color configuration file
-- Store course code to color mappings
-- Load color mappings on startup and apply to course tags
-- Ensure consistent color assignment for the same course
-
-**Effort Estimate:** ~3 hours
-
-### Enhancement 14: Confirmation Dialog for Clear Command
+### Enhancement 3: Confirmation Dialog for Clear Command
 
 **Current Limitation:** The `clear` command immediately deletes all contacts without confirmation, risking accidental data loss.
 
@@ -1714,9 +1569,9 @@ CourseBook represents a **moderate to high difficulty** extension of AB3. While 
 - Only execute clear if user confirms
 - Add option to bypass confirmation with flag (e.g., `clear --force`) for advanced users
 
-**Effort Estimate:** ~2 hours
+**Effort Estimate:** ~1 hour
 
-### Enhancement 15: Support for International Phone Number Formats
+### Enhancement 4: Support for International Phone Number Formats
 
 **Current Limitation:** Phone numbers only accept digits; country codes with "+" and spaces (e.g., "+65 1234 5678") are rejected.
 
@@ -1728,21 +1583,87 @@ CourseBook represents a **moderate to high difficulty** extension of AB3. While 
 - Display phone numbers in formatted style
 - Support multiple international formats
 
-**Effort Estimate:** ~3 hours
+**Effort Estimate:** ~1.5 hours
 
-### Enhancement 16: Allow Birthday Deletion
+### Enhancement 5: Persistent Theme Settings
 
-**Current Limitation:** Once a birthday is added, it cannot be deleted. If an invalid birthday is entered (e.g., 15-15-2020), the user cannot remove it.
+**Current Limitation:** Theme selection is not saved and resets to default on restart.
 
-**Proposed Enhancement:** Allow users to delete/remove birthday field using edit command.
+**Proposed Enhancement:** Persist theme preference across application restarts.
 
 **Implementation:**
-- Update `EditCommand` to support empty birthday parameter (e.g., `edit 1 b/`) to delete birthday
-- Update `EditPersonDescriptor` to distinguish between "no change" and "delete birthday"
-- Add validation to prevent invalid dates from being added in the first place
-- Update UI to handle missing birthday gracefully
+- Add theme preference to `UserPrefs` class
+- Save theme selection to `preferences.json`
+- Load and apply saved theme on application startup
+- Ensure theme preference survives application updates
+
+**Effort Estimate:** ~1 hour
+
+### Enhancement 6: Persistent Course Tag Colors
+
+**Current Limitation:** Color-coded course tags are default green and change on restart, so color changes
+are lost after app is closed.
+
+**Proposed Enhancement:** Persist the color assigned to each course tag across restarts.
+
+**Implementation:**
+- Add color mapping to `UserPrefs` or create separate color configuration file
+- Store course code to color mappings
+- Load color mappings on startup and apply to course tags
+- Ensure consistent color assignment for the same course
+
+**Effort Estimate:** ~1.5 hours
+
+### Enhancement 7: Display What Will Be Undone
+
+**Current Limitation:** Users cannot easily keep track of which command will be undone next. After performing multiple commands, it becomes unclear what the undo command will revert.
+
+**Proposed Enhancement:** Improve the undo command feature to display what action will be undone before execution, and show a summary of what was actually undone afterward. This helps users better understand and confirm their undo operations.
+
+**Implementation:**
+- Maintain descriptive history stack of executed commands that can be undone
+- Enhance the `undo` command to show a confirmation message detailing what was undone after execution.
+
+**Effort Estimate:** ~7.5 hours
+
+### Enhancement 8: Fuzzy Search
+
+**Current Limitation:** Search only supports exact substring matching.
+
+**Proposed Enhancement:** Implement fuzzy search using Levenshtein distance or similar algorithm.
+
+**Implementation:**
+- Add `FuzzySearchPredicate` that accepts similarity threshold
+- Update `FindCommand` to support fuzzy mode (e.g., `find n/alic --fuzzy`)
+- Rank results by similarity score
+
+**Effort Estimate:** ~5 hours
+
+### Enhancement 9: Keyboard Shortcuts for Commands
+
+**Current Limitation:** All commands must be typed fully (no shortcuts).
+
+**Proposed Enhancement:** Support keyboard shortcuts for common commands (e.g., Ctrl+L for list, Ctrl+F for find).
+
+**Implementation:**
+- Add keyboard event handlers in `MainWindow`
+- Map shortcuts to command text
+- Add shortcuts to help window
 
 **Effort Estimate:** ~3 hours
+
+### Enhancement 10: Export to CSV/vCard
+
+**Current Limitation:** No way to export contacts for use in other applications.
+
+**Proposed Enhancement:** Add `export` command to export contacts to CSV or vCard format.
+
+**Implementation:**
+- Add `ExportCommand` with format parameter (csv, vcf)
+- Implement CSV and vCard serialization
+- Add file chooser dialog for output path
+
+**Effort Estimate:** ~7.5 hours
 
 
 ---
