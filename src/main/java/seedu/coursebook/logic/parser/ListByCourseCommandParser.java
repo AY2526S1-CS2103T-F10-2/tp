@@ -28,6 +28,11 @@ public class ListByCourseCommandParser implements Parser<ListByCourseCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COURSE);
 
+        // reject unexpected preamble
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListByCourseCommand.MESSAGE_USAGE));
+        }
+
         // must have at least one c/
         if (argMultimap.getAllValues(PREFIX_COURSE).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListByCourseCommand.MESSAGE_USAGE));
