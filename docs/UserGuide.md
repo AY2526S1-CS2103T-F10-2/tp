@@ -810,7 +810,7 @@ Adds one or more courses to a contact without replacing existing courses.
 * `INDEX` (Required) — Position in currently displayed list (positive integer)
 * `c/COURSE_CODE[,COLOR]` (Required, multiple allowed) — Course code with optional color
 
-**Available Colors:** `green`, `yellow`, `red`, `blue`, `orange`, `purple`, `pink`
+**Available Colors:** `green`, `yellow`, `red`, `blue`, `orange`, `purple`, `pink`, `gray`
 
 **Behavior:**
 
