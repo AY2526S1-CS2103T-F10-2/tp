@@ -570,6 +570,16 @@ Finds contacts by searching across multiple fields with partial/substring matchi
 
 </div>
 
+<div markdown="span" class="alert alert-warning">
+
+**:warning: Important:** <br>
+
+- Names containing `/` with **1-2 letters before the `/`** (e.g., `S/o`, `Al/Johnson`) must use the `n/` prefix when searching. <br>
+- **Use `find n/S/o`** instead of `find S/o` to avoid prefix ambiguity. <br>
+- Names with **3+ letters before `/`** (e.g., `Smith/Johnson`) work without prefixes: `find Smith/Johnson` ✓ <br>
+
+</div>
+
 **Examples:**
 
 ```
@@ -601,6 +611,16 @@ find n/Alice t/friend
 find alex david
 ```
 *No prefixes → name-only search for "alex" or "david"*
+
+```
+find n/S/o
+```
+*Finds persons with names containing "S/o" — note: must use `n/` prefix for names with 1-2 letters before `/`*
+
+```
+find Smith/Johnson
+```
+*Finds persons with names containing "Smith/Johnson" — works without prefix for names with 3+ letters before `/`*
 
 **Expected Output (found):**
 ```

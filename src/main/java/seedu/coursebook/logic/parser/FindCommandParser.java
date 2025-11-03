@@ -13,6 +13,7 @@ import java.util.List;
 
 import seedu.coursebook.logic.commands.FindCommand;
 import seedu.coursebook.logic.parser.exceptions.ParseException;
+import seedu.coursebook.model.person.Name;
 import seedu.coursebook.model.person.PersonContainsKeywordsPredicate;
 
 /**
@@ -31,15 +32,22 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        // Reject any unknown/disallowed prefixes immediately
-        // Allowed: n/, p/, e/, a/, t/
-        String[] tokens = trimmedArgs.split("\\s+");
+        // Allowed prefixes: n/, p/, e/, a/, t/
         List<String> allowedPrefixes = Arrays.asList("n/", "p/", "e/", "a/", "t/");
-        for (String token : tokens) {
-            if (token.matches("[A-Za-z]+/.*")
-                    && allowedPrefixes.stream().noneMatch(token::startsWith)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+        // Check the entire input for invalid prefixes before tokenization
+        // This catches invalid prefixes even when mixed with valid ones
+        String[] allTokens = trimmedArgs.split("\\s+");
+        for (String token : allTokens) {
+            // Check if token looks like a short prefix (1-2 letters + /)
+            if (token.matches("[A-Za-z]{1,2}/.*")) {
+                String prefix = token.substring(0, token.indexOf('/') + 1);
+                if (!allowedPrefixes.contains(prefix)) {
+                    // This looks like an invalid prefix, reject it
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                }
             }
+            // Tokens with 3+ letters before / (like "Smith/Johnson") are allowed as they're clearly names
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
@@ -77,18 +85,41 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
+        // Check preamble for invalid prefixes (tokens that look like prefixes but aren't allowed)
+        // This prevents inputs like "find b/2020-01-01" or "find z/foo" from being treated as name searches
+        // Names with / (like "Smith/Johnson") are allowed as they have 3+ letters before /
+        if (!preamble.isEmpty()) {
+            String[] preambleTokens = preamble.split("\\s+");
+            for (String token : preambleTokens) {
+                // Check if token looks like a short prefix (1-2 letters + /)
+                // Only reject tokens that look like invalid prefixes, not longer names with /
+                if (token.matches("[A-Za-z]{1,2}/.*")) {
+                    String prefix = token.substring(0, token.indexOf('/') + 1);
+                    if (!allowedPrefixes.contains(prefix)) {
+                        // This looks like an invalid prefix, reject it
+                        // Note: Names like "Al/Johnson" will be rejected here, but that's acceptable
+                        // as they're ambiguous - users can use "Al Johnson" or "n/Al/Johnson" instead
+                        throw new ParseException(
+                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    }
+                }
+                // Tokens with 3+ letters before / (like "Smith/Johnson") are allowed as they're clearly names
+            }
+        }
+
         if (!anyPrefixedProvided) {
             // Fallback to legacy behavior: treat entire args as name keywords
             String[] keywords = trimmedArgs.split("\\s+");
             nameKeywords.addAll(Arrays.asList(keywords));
         }
 
-        // Validate name tokens are ASCII letters only (A–Z) when provided, whether via prefixes or fallback
+        // Validate name tokens match the same characters allowed in names when provided,
+        // whether via prefixes or fallback
         if (!nameKeywords.isEmpty()) {
             boolean invalidNameToken = nameKeywords.stream()
-                    .anyMatch(s -> s == null || s.isBlank() || !s.matches("[A-Za-z]+"));
+                    .anyMatch(s -> s == null || s.isBlank() || !s.matches("[\\p{Alnum} '/.,-]+"));
             if (invalidNameToken) {
-                throw new ParseException(seedu.coursebook.logic.Messages.MESSAGE_NAME_ALPHA_ONLY);
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
             }
         }
 

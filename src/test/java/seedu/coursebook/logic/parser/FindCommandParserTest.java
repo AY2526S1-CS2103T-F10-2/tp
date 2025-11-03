@@ -10,6 +10,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import seedu.coursebook.logic.commands.FindCommand;
+import seedu.coursebook.model.person.Name;
 import seedu.coursebook.model.person.PersonContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -39,15 +40,17 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_unprefixedNonAlpha_throwsParseException() {
-        assertParseFailure(parser, "Alice123", seedu.coursebook.logic.Messages.MESSAGE_NAME_ALPHA_ONLY);
-        assertParseFailure(parser, "Bob-", seedu.coursebook.logic.Messages.MESSAGE_NAME_ALPHA_ONLY);
-        assertParseFailure(parser, "Alice Bob-", seedu.coursebook.logic.Messages.MESSAGE_NAME_ALPHA_ONLY);
+        // Test invalid characters that aren't allowed in names
+        assertParseFailure(parser, "Alice@Bob", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "Bob#123", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "Alice Bob$", Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_prefixedNameNonAlpha_throwsParseException() {
-        assertParseFailure(parser, "n/Alice123", seedu.coursebook.logic.Messages.MESSAGE_NAME_ALPHA_ONLY);
-        assertParseFailure(parser, "n/Bob- n/Alice", seedu.coursebook.logic.Messages.MESSAGE_NAME_ALPHA_ONLY);
+        // Test invalid characters that aren't allowed in names
+        assertParseFailure(parser, "n/Alice@Bob", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "n/Bob#123 n/Alice", Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
