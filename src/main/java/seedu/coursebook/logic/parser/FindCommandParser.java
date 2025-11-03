@@ -99,7 +99,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                         // This looks like an invalid prefix, reject it
                         // Note: Names like "Al/Johnson" will be rejected here, but that's acceptable
                         // as they're ambiguous - users can use "Al Johnson" or "n/Al/Johnson" instead
-                        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                        throw new ParseException(
+                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
                     }
                 }
                 // Tokens with 3+ letters before / (like "Smith/Johnson") are allowed as they're clearly names
@@ -112,7 +113,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             nameKeywords.addAll(Arrays.asList(keywords));
         }
 
-        // Validate name tokens match the same characters allowed in names when provided, whether via prefixes or fallback
+        // Validate name tokens match the same characters allowed in names when provided,
+        // whether via prefixes or fallback
         if (!nameKeywords.isEmpty()) {
             boolean invalidNameToken = nameKeywords.stream()
                     .anyMatch(s -> s == null || s.isBlank() || !s.matches("[\\p{Alnum} '/.,-]+"));
