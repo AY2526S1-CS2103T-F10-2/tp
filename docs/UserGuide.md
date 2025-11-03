@@ -1486,7 +1486,7 @@ Redo success!
 
 Each person card has a copy button on the right side that copies the phone number to your clipboard.
 
-![Copy Button](images/copy.jpg)
+![Copy Button](images/copy.png)
 
 *Figure 18: Copy person's phone number to clipboard.*
 
