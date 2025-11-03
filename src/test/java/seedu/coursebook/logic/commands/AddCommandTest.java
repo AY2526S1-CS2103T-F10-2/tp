@@ -20,7 +20,6 @@ import javafx.collections.ObservableList;
 import seedu.coursebook.commons.core.GuiSettings;
 import seedu.coursebook.logic.CommandHistory;
 import seedu.coursebook.logic.Messages;
-import seedu.coursebook.logic.commands.exceptions.CommandException;
 import seedu.coursebook.model.CourseBook;
 import seedu.coursebook.model.Model;
 import seedu.coursebook.model.ReadOnlyCourseBook;
@@ -60,8 +59,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class,
-                AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub, commandHistory)
+        assertThrows(AssertionError.class,
+                "This method should not be called.", () -> addCommand.execute(modelStub, commandHistory)
         );
     }
 
@@ -249,6 +248,23 @@ public class AddCommandTest {
         public boolean hasThemeChangedDuringUndo() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasPersonWithName(Person person) {
+            return false;
+        }
+
+        @Override
+        public boolean hasPersonWithPhone(Person person) {
+            return false;
+        }
+
+        @Override
+        public boolean hasPersonWithEmail(Person person) {
+            return false;
+        }
+
+
 
 
     }

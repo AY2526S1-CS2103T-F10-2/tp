@@ -122,8 +122,6 @@ public class HelpWindow extends UiPart<Stage> {
             // General Commands
             new CommandSummary("theme", "Changes the application theme",
                     "theme blue OR theme love"),
-            new CommandSummary("home", "Returns to the home page (courses view)",
-                    "home"),
             new CommandSummary("summary", "Shows summary statistics with breakdown by course",
                     "summary"),
             new CommandSummary("undo", "Reverts the last change",

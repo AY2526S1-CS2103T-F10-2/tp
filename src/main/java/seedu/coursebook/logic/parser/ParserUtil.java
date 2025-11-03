@@ -48,7 +48,7 @@ public class ParserUtil {
             long value = Long.parseLong(trimmedIndex);
             // Check for index 0 specifically
             if (value == 0) {
-                throw new ParseException(seedu.coursebook.logic.Messages.MESSAGE_INDEX_OUT_OF_RANGE);
+                throw new ParseException(seedu.coursebook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             if (value < 1 || value > Integer.MAX_VALUE) {
                 throw new ParseException(MESSAGE_INVALID_INDEX);
@@ -61,17 +61,20 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be trimmed, and multiple consecutive spaces
+     * will be normalized to single spaces.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
+        // Normalize multiple consecutive spaces to single space
+        String normalizedName = trimmedName.replaceAll("\\s+", " ");
+        if (!Name.isValidName(normalizedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new Name(normalizedName);
     }
 
     /**
@@ -220,7 +223,7 @@ public class ParserUtil {
         String trimmedOrder = order.trim();
 
         if (!trimmedOrder.equals("asc") && !trimmedOrder.equals("desc")) {
-            throw new ParseException("Invalid sort order. Use only 'asc' or 'desc'.");
+            throw new ParseException("Invalid sort order. Use only 'asc' or 'desc' (case-sensitive).");
         }
         return trimmedOrder;
     }

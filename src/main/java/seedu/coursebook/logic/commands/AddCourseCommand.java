@@ -62,26 +62,46 @@ public class AddCourseCommand extends Command {
         Person personToEdit = model.getFilteredPersonList().get(index.getZeroBased());
         Set<Course> existingCourses = personToEdit.getCourses();
 
-        Set<Course> newCourses = new HashSet<>(existingCourses);
-        newCourses.addAll(coursesToAdd);
-
         if (existingCourses.containsAll(coursesToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_COURSE);
         }
 
-        // Determine global color consistency and handle conflicts only after we know command will succeed
+        // Enforce global course color consistency and handle conflicts
+        Set<Course> updatedCoursesToAdd = new HashSet<>();
         for (Course toAdd : coursesToAdd) {
             CourseColor existingColor = model.getFilteredCourseList().stream()
                     .filter(c -> c.courseCode.equalsIgnoreCase(toAdd.courseCode))
                     .map(c -> c.color)
                     .findFirst()
                     .orElse(null);
-            if (existingColor != null && toAdd.color != null && existingColor != toAdd.color) {
+
+            // Check if course color is the default GREEN (which means user didn't specify a color)
+            boolean isDefaultGreen = (toAdd.color == CourseColor.GREEN);
+
+            // Priority: Preserve existing color if course exists and user didn't specify a color
+            if (existingColor != null && isDefaultGreen && existingColor != CourseColor.GREEN) {
+                // Course exists with a color (not GREEN), but user didn't specify one - use existing color
+                updatedCoursesToAdd.add(new Course(toAdd.courseCode, existingColor));
+            } else if (existingColor != null && toAdd.color != null && existingColor != toAdd.color) {
+                // User explicitly specified a different color than existing - update globally to user's choice
                 model.setCourseColor(toAdd.courseCode, toAdd.color);
-            } else if (existingColor == null && toAdd.color == null) {
+                updatedCoursesToAdd.add(new Course(toAdd.courseCode, toAdd.color));
+            } else if (existingColor == null && isDefaultGreen) {
+                // New course, no color specified - default to GREEN
                 model.setCourseColor(toAdd.courseCode, CourseColor.GREEN);
+                updatedCoursesToAdd.add(new Course(toAdd.courseCode, CourseColor.GREEN));
+            } else if (existingColor != null && existingColor == toAdd.color) {
+                // Existing color matches what user specified - no change needed
+                updatedCoursesToAdd.add(toAdd);
+            } else {
+                // No conflict, use course as is (e.g., existingColor is GREEN and course.color is GREEN)
+                updatedCoursesToAdd.add(toAdd);
             }
         }
+
+        // Create new courses set with existing courses plus updated courses with correct colors
+        Set<Course> newCourses = new HashSet<>(existingCourses);
+        newCourses.addAll(updatedCoursesToAdd);
 
         Person editedPerson = new Person(
                 personToEdit.getName(),

@@ -8,6 +8,7 @@ import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.coursebook.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.coursebook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -47,15 +48,14 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]\n"
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON =
-            "This person's name/phone/email already exists in the address book.";
+    public static final String MESSAGE_NO_CHANGES = "No changes detected.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -84,12 +84,38 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        boolean hasDuplicate = model.getFilteredPersonList().stream()
-                .filter(person -> !person.equals(personToEdit)) // exclude the person being edited
-                .anyMatch(editedPerson::isSamePerson);
+        // Check if any changes were actually made
+        if (personToEdit.equals(editedPerson)) {
+            throw new CommandException(MESSAGE_NO_CHANGES);
+        }
 
-        if (hasDuplicate) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        boolean hasSameName = model.getFilteredPersonList().stream()
+                .filter(person -> !person.equals(personToEdit)) // exclude the person being edited
+                .anyMatch(editedPerson::isSameName);
+
+        boolean hasSamePhone = model.getFilteredPersonList().stream()
+                .filter(person -> !person.equals(personToEdit)) // exclude the person being edited
+                .anyMatch(editedPerson::isSamePhone);
+
+        boolean hasSameEmail = model.getFilteredPersonList().stream()
+                .filter(person -> !person.equals(personToEdit)) // exclude the person being edited
+                .anyMatch(editedPerson::isSameEmail);
+
+        List<String> duplicateFields = new ArrayList<>();
+
+        if (hasSameName) {
+            duplicateFields.add("name");
+        }
+        if (hasSamePhone) {
+            duplicateFields.add("phone");
+        }
+        if (hasSameEmail) {
+            duplicateFields.add("email");
+        }
+
+        if (!duplicateFields.isEmpty()) {
+            String message = "This edit will introduce a duplicate " + String.join(", ", duplicateFields) + ".";
+            throw new CommandException(message);
         }
 
         model.setPerson(personToEdit, editedPerson);

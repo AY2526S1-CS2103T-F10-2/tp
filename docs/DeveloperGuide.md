@@ -369,7 +369,6 @@ CourseBook implements **27 command classes** following the Command Pattern:
 - `ExitCommand` - Exit application
 - `HelpCommand` - Show help
 - `HistoryCommand` - Show command history
-- `HomeCommand` - Navigate to home view
 - `SummaryCommand` - Display summary statistics
 - `ThemeCommand` - Change theme
 - `UndoCommand`, `RedoCommand` - Undo/redo operations
@@ -491,17 +490,21 @@ These operations are exposed in the `Model` interface as `Model#commitCourseBook
 The user launches the application for the first time. The `VersionedCourseBook` will be initialized with the initial course book state, and the `currentStatePointer` pointing to that single course book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
+
 *Figure 10: Shows initial state with one CourseBook snapshot and pointer at index 0*
 
 **Step 2. Delete Command**
 The user executes `delete 5` command to delete the 5th person in the course book. The `delete` command calls `Model#commitCourseBook()`, causing the modified state of the course book after the `delete 5` command executes to be saved in the `courseBookStateList`, and the `currentStatePointer` is shifted to the newly inserted state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
+
 *Figure 11: Shows two states: initial and after delete, pointer at index 1*
 
 **Step 3. Add Command**
 The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitCourseBook()`, causing another modified course book state to be saved into the `courseBookStateList`.
+
 ![UndoRedoState2](images/UndoRedoState2.png)
+
 *Figure 12: Shows three states, pointer at index 2*
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitCourseBook()`, so the course book state will not be saved into the `courseBookStateList`.
@@ -511,6 +514,7 @@ The user executes `add n/David …​` to add a new person. The `add` command al
 The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCourseBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous course book state, and restores the course book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
+
 *Figure 13: Shows three states with pointer moved back to index 1*
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial CourseBook state, then there are no previous CourseBook states to restore. The `undo` command uses `Model#canUndoCourseBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
@@ -521,6 +525,7 @@ The user now decides that adding the person was a mistake, and decides to undo t
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+
 *Figure 14: Shows the flow from UndoCommand through LogicManager and back*
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -531,6 +536,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+
 *Figure 15: Shows interactions between ModelManager and VersionedCourseBook during undo*
 
 ### 6.8 Redo
@@ -544,12 +550,14 @@ The `redo` command does the opposite — it calls `Model#redoCourseBook()`, whic
 The user then decides to execute the command `list`. Commands that do not modify the course book, such as `list`, will usually not call `Model#commitCourseBook()`, `Model#undoCourseBook()`, or `Model#redoCourseBook()`. Thus, the `courseBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
+
 *Figure 16: Shows three states with pointer still at index 1 after list command*
 
 **Step 6. State Branching**
 The user executes `clear`, which calls `Model#commitCourseBook()`. Since the `currentStatePointer` is not pointing at the end of the `courseBookStateList`, all course book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
+
 *Figure 17: Shows two states: original and clear state, with the "add David" state purged*
 
 The following activity diagram summarizes what happens when a user executes a new command:
@@ -777,7 +785,7 @@ Classes used by multiple components are in the `seedu.coursebook.commons` packag
 
 **`Version`**
 - Represents application version (major.minor.patch + early access flag)
-- Current version: `1.4.0` (with early access)
+- Current version: `1.5` (with early access)
 
 **`Index`**
 - Wrapper class for 1-based indices
@@ -968,7 +976,7 @@ CourseBook uses a **two-phase deletion** process:
 
 ---
 
-## **10. Logging**
+## 10. Logging
 
 ### 10.1 Logging Infrastructure
 
@@ -1028,7 +1036,7 @@ Log level is configured in `config.json`:
 
 ---
 
-## **11. Configuration**
+## 11. Configuration
 
 Refer to the guide [_Configuration guide_](Configuration.md).
 
@@ -1040,7 +1048,7 @@ Refer to the guide [_Configuration guide_](Configuration.md).
 
 ---
 
-## **12. Documentation, logging, configuration, dev-ops**
+## 12. Documentation, logging, configuration, dev-ops
 
 - [Documentation guide](Documentation.md)
 - [Logging guide](Logging.md)
@@ -1049,7 +1057,7 @@ Refer to the guide [_Configuration guide_](Configuration.md).
 
 ---
 
-## **13. Appendix: Requirements**
+## 13. Appendix: Requirements
 
 ### 13.1 Product Scope
 
@@ -1160,6 +1168,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3b. The given name does not match any contact:
   - 3b1. CourseBook shows "No such contact found!"
+  - Use case resumes at step 2.
+
+- 3c. The given name matches multiple contacts:
+  - 3c1. CourseBook shows "Multiple contacts found with that name. Please delete by index."
   - Use case resumes at step 2.
 
 - 5a. User cancels deletion:
@@ -1391,7 +1403,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Term | Definition |
 |------|------------|
 | **Mainstream OS** | Windows, Linux, Unix, MacOS |
-| **Private contact detail** | A contact detail that is not meant to be shared with others |
 | **Actor** | A user or external entity that interacts with the system |
 | **CourseBook** | The system that stores and manages contact information |
 | **Contact** | A person whose details are stored in the course book |
@@ -1419,7 +1430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## **14. Appendix: Effort**
+## 14. Appendix: Effort
 
 ### 14.1 Difficulty Level
 
@@ -1518,7 +1529,7 @@ CourseBook represents a **moderate to high difficulty** extension of AB3. While 
 
 ---
 
-## **15. Appendix: Planned Enhancements**
+## 15. Appendix: Planned Enhancements
 
 ### Team Size: 5
 
@@ -1641,93 +1652,22 @@ CourseBook represents a **moderate to high difficulty** extension of AB3. While 
 
 **Effort Estimate:** ~20 hours
 
-### Enhancement 10: Module Code Validation
+### Enhancement 10: Display what will be undone
 
-**Current Limitation:** Module codes do not have any validation or restrictions, allowing invalid codes like "ABC" or "12345".
+**Current Limitation:** Users cannot easily keep track of which command will be undone next. After performing multiple commands, it becomes unclear what the undo command will revert.
 
-**Proposed Enhancement:** Add validation for module codes to ensure they follow standard university module code formats (e.g., CS2103T, MA1521, GEH1001).
-
-**Implementation:**
-- Add regex validation in `Course` class for module code format
-- Update `AddCommand` and `EditCommand` parsers to validate module codes
-- Display clear error messages for invalid module codes
-- Support configurable module code patterns for different universities
-
-**Effort Estimate:** ~4 hours
-
-### Enhancement 11: Persistent Theme Settings
-
-**Current Limitation:** Theme selection (light/dark mode) is not saved and resets to default on restart.
-
-**Proposed Enhancement:** Persist theme preference across application restarts.
+**Proposed Enhancement:** Improve the undo command feature to display what action will be undone before execution, and show a summary of what was actually undone afterward. This helps users better understand and confirm their undo operations.
 
 **Implementation:**
-- Add theme preference to `UserPrefs` class
-- Save theme selection to `preferences.json`
-- Load and apply saved theme on application startup
-- Ensure theme preference survives application updates
+- Maintain descriptive history stack of executed commands that can be undone
+- Enhance the `undo` command to show a confirmation message detailing what was undone after execution.
 
-**Effort Estimate:** ~2 hours
+**Effort Estimate:** ~15 hours
 
-### Enhancement 12: Persistent Course Tag Colors
-
-**Current Limitation:** Color-coded course tags are randomly assigned and change on restart, making it difficult to visually associate courses.
-
-**Proposed Enhancement:** Persist the color assigned to each course tag across restarts.
-
-**Implementation:**
-- Add color mapping to `UserPrefs` or create separate color configuration file
-- Store course code to color mappings
-- Load color mappings on startup and apply to course tags
-- Ensure consistent color assignment for the same course
-
-**Effort Estimate:** ~3 hours
-
-### Enhancement 13: Confirmation Dialog for Clear Command
-
-**Current Limitation:** The `clear` command immediately deletes all contacts without confirmation, risking accidental data loss.
-
-**Proposed Enhancement:** Add a confirmation dialog before executing the `clear` command.
-
-**Implementation:**
-- Update `ClearCommand` to trigger confirmation dialog
-- Add confirmation dialog UI component
-- Only execute clear if user confirms
-- Add option to bypass confirmation with flag (e.g., `clear --force`) for advanced users
-
-**Effort Estimate:** ~2 hours
-
-### Enhancement 14: Support for International Phone Number Formats
-
-**Current Limitation:** Phone numbers only accept digits; country codes with "+" and spaces (e.g., "+65 1234 5678") are rejected.
-
-**Proposed Enhancement:** Accept international phone number formats including "+" prefix and spaces for readability.
-
-**Implementation:**
-- Update `Phone` validation regex to accept "+", spaces, and hyphens
-- Normalize phone numbers for storage (remove spaces/hyphens)
-- Display phone numbers in formatted style
-- Support multiple international formats
-
-**Effort Estimate:** ~3 hours
-
-### Enhancement 15: Allow Birthday Deletion
-
-**Current Limitation:** Once a birthday is added, it cannot be deleted. If an invalid birthday is entered (e.g., 15-15-2020), the user cannot remove it.
-
-**Proposed Enhancement:** Allow users to delete/remove birthday field using edit command.
-
-**Implementation:**
-- Update `EditCommand` to support empty birthday parameter (e.g., `edit 1 b/`) to delete birthday
-- Update `EditPersonDescriptor` to distinguish between "no change" and "delete birthday"
-- Add validation to prevent invalid dates from being added in the first place
-- Update UI to handle missing birthday gracefully
-
-**Effort Estimate:** ~3 hours
 
 ---
 
-## **16. Summary**
+## 16. Summary
 
 CourseBook is a robust, well-architected application for managing academic contacts. This Developer Guide provides comprehensive documentation of the system's design, and implementation. Key highlights:
 
