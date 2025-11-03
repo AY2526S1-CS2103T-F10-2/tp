@@ -1583,7 +1583,7 @@ CourseBook represents a **moderate to high difficulty** extension of AB3. While 
 - Display phone numbers in formatted style
 - Support multiple international formats
 
-**Effort Estimate:** ~1.5 hours
+**Effort Estimate:** ~2 hours
 
 ### Enhancement 5: Persistent Theme Settings
 
@@ -1612,7 +1612,7 @@ are lost after app is closed.
 - Load color mappings on startup and apply to course tags
 - Ensure consistent color assignment for the same course
 
-**Effort Estimate:** ~1.5 hours
+**Effort Estimate:** ~1 hours
 
 ### Enhancement 7: Display What Will Be Undone
 
@@ -1624,7 +1624,7 @@ are lost after app is closed.
 - Maintain descriptive history stack of executed commands that can be undone
 - Enhance the `undo` command to show a confirmation message detailing what was undone after execution.
 
-**Effort Estimate:** ~7.5 hours
+**Effort Estimate:** ~8 hours
 
 ### Enhancement 8: Fuzzy Search
 
@@ -1641,7 +1641,7 @@ are lost after app is closed.
 
 ### Enhancement 9: Keyboard Shortcuts for Commands
 
-**Current Limitation:** All commands must be typed fully (no shortcuts).
+**Current Limitation:** All commands must be typed (no shortcuts).
 
 **Proposed Enhancement:** Support keyboard shortcuts for common commands (e.g., Ctrl+L for list, Ctrl+F for find).
 
@@ -1654,7 +1654,7 @@ are lost after app is closed.
 
 ### Enhancement 10: Export to CSV/vCard
 
-**Current Limitation:** No way to export contacts for use in other applications.
+**Current Limitation:** Unable to export contacts for use in other applications.
 
 **Proposed Enhancement:** Add `export` command to export contacts to CSV or vCard format.
 
@@ -1663,7 +1663,7 @@ are lost after app is closed.
 - Implement CSV and vCard serialization
 - Add file chooser dialog for output path
 
-**Effort Estimate:** ~7.5 hours
+**Effort Estimate:** ~7 hours
 
 
 ---
