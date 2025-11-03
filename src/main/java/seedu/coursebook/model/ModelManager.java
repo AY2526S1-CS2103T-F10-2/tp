@@ -135,6 +135,24 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPersonWithName(Person person) {
+        return versionedCourseBook.getPersonList().stream()
+                .anyMatch(p -> p.getName().equals(person.getName()));
+    }
+
+    @Override
+    public boolean hasPersonWithPhone(Person person) {
+        return versionedCourseBook.getPersonList().stream()
+                .anyMatch(p -> p.getPhone().equals(person.getPhone()));
+    }
+
+    @Override
+    public boolean hasPersonWithEmail(Person person) {
+        return versionedCourseBook.getPersonList().stream()
+                .anyMatch(p -> p.getEmail().equals(person.getEmail()));
+    }
+
+    @Override
     public void deletePerson(Person target) {
         versionedCourseBook.removePerson(target);
     }

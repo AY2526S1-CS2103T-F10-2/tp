@@ -162,4 +162,19 @@ public interface Model {
      * Sets the theme color
      */
     CommandResult setCurrentTheme(ThemeCommand.Theme theme);
+
+    /**
+     * Returns true if a person with the same name exists in the course book.
+     */
+    boolean hasPersonWithName(Person person);
+
+    /**
+     * Returns true if a person with the same phone number exists in the course book.
+     */
+    boolean hasPersonWithPhone(Person person);
+
+    /**
+     * Returns true if a person with the same email exists in the course book.
+     */
+    boolean hasPersonWithEmail(Person person);
 }
