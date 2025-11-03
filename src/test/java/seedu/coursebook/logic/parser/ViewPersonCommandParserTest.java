@@ -54,7 +54,7 @@ public class ViewPersonCommandParserTest {
     public void parse_zeroIndex_throwsParseException() {
         // "0" fails as an index and shows "Index out of range" error
         assertParseFailure(parser, "0",
-                seedu.coursebook.logic.Messages.MESSAGE_INDEX_OUT_OF_RANGE);
+                seedu.coursebook.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
