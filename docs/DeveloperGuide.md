@@ -672,15 +672,15 @@ To convert between Java objects and JSON, CourseBook uses **Jackson** library wi
 
 **Example - JsonAdaptedPerson:**
 
-```java
-// Converting Person to JSON
-JsonAdaptedPerson jsonPerson = new JsonAdaptedPerson(personObject);
-// Jackson serializes jsonPerson to JSON
 
-// Converting JSON to Person
-JsonAdaptedPerson jsonPerson = // deserialized from JSON
-Person personObject = jsonPerson.toModelType(); // throws IllegalValueException if invalid
-```
+> // Converting Person to JSON
+> JsonAdaptedPerson jsonPerson = new JsonAdaptedPerson(personObject);
+> // Jackson serializes jsonPerson to JSON
+> 
+> // Converting JSON to Person
+> JsonAdaptedPerson jsonPerson = // deserialized from JSON
+>  personObject = jsonPerson.toModelType(); // throws IllegalValueException if invalid
+
 
 ### 7.4 Data Loading and Saving Flow
 
