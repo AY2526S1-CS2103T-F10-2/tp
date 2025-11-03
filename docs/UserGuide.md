@@ -288,16 +288,15 @@ Adds a new contact to your coursebook.
 
 **Examples:**
 
-```
-add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
-```
+> add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
+
 *Adds John Doe without tags or courses*
 
-> add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/classmate
+> add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567  t/classmate
 
 *Adds Betsy Crowe with two tags (friend, classmate)*
 
->add n/Alice p/94351253 e/alice@example.com a/123, Jurong West Ave 6 c/CS2103T,yellow c/CS2101,blue
+>add n/Alice p/94351253 e/alice@example.com a/123, Jurong West Ave 6  c/CS2103T,yellow c/CS2101,blue
 
 *Adds Alice with two color-coded courses*
 
